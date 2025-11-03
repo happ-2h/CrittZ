@@ -1,3 +1,5 @@
+import Player from "../entity/mobile/player/Player";
+import Renderer from "../gfx/Renderer";
 import { SCREEN_HEIGHT, SCREEN_WIDTH } from "./constants";
 
 export default class Game {
@@ -5,6 +7,8 @@ export default class Game {
   #span; // Temp span for displaying FPS
 
   #last; // Holds previous RAF timestamp
+
+  #player; // TEMP
 
   constructor() {
     this.#cnv = document.querySelector("canvas");
@@ -16,10 +20,14 @@ export default class Game {
 
     this.#last = performance.now();
 
+    this.#player = new Player(0, 0);
+
     this.init();
   }
 
   init() {
+    Renderer.init(this.#cnv.getContext("2d"));
+
     this.update(performance.now());
   }
 
@@ -31,8 +39,12 @@ export default class Game {
 
     requestAnimationFrame(this.update.bind(this));
 
+    this.#player.update(dt);
+
     this.render();
   }
 
-  render() {}
+  render() {
+    this.#player.draw();
+  }
 };
