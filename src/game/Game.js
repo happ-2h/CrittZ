@@ -20,7 +20,7 @@ export default class Game {
 
     this.#last = performance.now();
 
-    this.#player = new Player(0, 0);
+    this.#player = new Player(60, 40);
 
     this.init();
   }

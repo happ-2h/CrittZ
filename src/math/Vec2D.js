@@ -14,6 +14,18 @@ export default class Vec2D {
   static zero() { return new Vec2D(0, 0); }
 
   /**
+   * @brief Normalizes the vector
+   */
+  normalize() {
+    const len = this.length;
+
+    if (len === 0) return;
+
+    this.#x /= len;
+    this.#y /= len;
+  }
+
+  /**
    * @brief Sets new values for x and y
    *
    * @param {Number} x - New value for x
@@ -24,9 +36,13 @@ export default class Vec2D {
     this.#y = y;
   }
 
+  get length() {
+    return Math.sqrt(this.#x * this.#x + this.#y * this.#y);
+  }
+
   //Mutators
   set x(x) { this.#x = x; }
-  set x(y) { this.#y = y; }
+  set y(y) { this.#y = y; }
 
   //Accessors
   get x() { return this.#x; }

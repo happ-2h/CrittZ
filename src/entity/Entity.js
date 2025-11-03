@@ -1,12 +1,18 @@
 import { TILE_SIZE } from "../game/constants";
 import Renderer from "../gfx/Renderer";
 import Rectangle from "../math/shapes/Rectangle";
+import Vec2D from "../math/Vec2D";
 
 export default class Entity {
-  #src; // Image blit source rectangle
-  #dst; // Canvas destination rectangle
+  #src;   // Image blit source rectangle
+  #dst;   // Canvas destination rectangle
 
-  constructor() {
+  // Physics
+  #dir;   // Directional vector
+  #vel;   // Velocity vector
+  #accel; // Acceleration vector
+
+  constructor(x=0, y=0) {
     if (this.constructor === Entity)
       throw new Error("Cannot instantiate abstract class");
 
@@ -18,7 +24,11 @@ export default class Entity {
       throw new Error("draw() must be implemented");
 
     this.#src = new Rectangle(0, 0, TILE_SIZE, TILE_SIZE);
-    this.#dst = new Rectangle(0, 0, TILE_SIZE, TILE_SIZE);
+    this.#dst = new Rectangle(x, y, TILE_SIZE, TILE_SIZE);
+
+    this.#dir   = Vec2D.zero();
+    this.#vel   = Vec2D.zero();
+    this.#accel = Vec2D.zero();
   }
 
   draw() {
@@ -31,6 +41,10 @@ export default class Entity {
   }
 
   // Accessors
-  get src() { return this.#src; }
-  get dst() { return this.#dst; }
+  get src()   { return this.#src; }
+  get dst()   { return this.#dst; }
+
+  get dir()   { return this.#dir; }
+  get vel()   { return this.#vel; }
+  get accel() { return this.#accel; }
 };
