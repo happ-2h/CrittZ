@@ -45,6 +45,16 @@ class _Renderer {
       height * SCALE
     );
   }
+
+  /**
+   * @brief Clears an area of the canvas from (0, 0) to (width, height)
+   *
+   * @param {Number} width  - Width  of area to clear
+   * @param {Number} height - Height of area of clear
+   */
+  clear(width=0, height=0) {
+    this.#ctx.clearRect(0, 0, width, height);
+  }
 };
 
 const Renderer = new _Renderer;

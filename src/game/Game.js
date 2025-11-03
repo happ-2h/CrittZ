@@ -45,6 +45,8 @@ export default class Game {
   }
 
   render() {
+    Renderer.clear(this.#cnv.width, this.#cnv.height);
+
     this.#player.draw();
   }
 };
