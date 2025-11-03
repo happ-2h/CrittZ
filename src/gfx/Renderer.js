@@ -1,4 +1,6 @@
 import { SCALE, TILE_SIZE } from "../game/constants";
+import Rectangle from "../math/shapes/Rectangle";
+import TextureHandler from "../utils/TextureHandler";
 
 let instance = null;
 
@@ -54,6 +56,24 @@ class _Renderer {
    */
   clear(width=0, height=0) {
     this.#ctx.clearRect(0, 0, width, height);
+  }
+
+  /**
+   * @brief Draws an image to the canvas
+   *
+   * @param {String} textureID - ID of the texture
+   * @param {Rectangle} src    - Blit image source
+   * @param {Rectangle} dst    - Destination to draw the image
+   */
+  image(textureID="", src=null, dst=null) {
+    this.#ctx.drawImage(
+      TextureHandler.getTexture(textureID),
+      src.x, src.y, src.w, src.h,
+      dst.x * SCALE,
+      dst.y * SCALE,
+      dst.w * SCALE,
+      dst.h * SCALE
+    );
   }
 };
 

@@ -1,5 +1,6 @@
 import Player from "../entity/mobile/player/Player";
 import Renderer from "../gfx/Renderer";
+import AssetHandler from "../utils/AssetHandler";
 import { SCREEN_HEIGHT, SCREEN_WIDTH } from "./constants";
 
 export default class Game {
@@ -22,7 +23,12 @@ export default class Game {
 
     this.#player = new Player(60, 40);
 
-    this.init();
+    AssetHandler.poll("spritesheet", "spritesheet.png");
+
+    AssetHandler.load()
+      .then(val  => this.init())
+      .catch(err => console.error(err));
+
   }
 
   init() {
