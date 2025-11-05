@@ -2,6 +2,7 @@ import { TILE_SIZE } from "../game/constants";
 import Renderer from "../gfx/Renderer";
 import Rectangle from "../math/shapes/Rectangle";
 import Vec2D from "../math/Vec2D";
+import TextureHandler from "../utils/TextureHandler";
 
 export default class Entity {
   #src;   // Image blit source rectangle
@@ -32,12 +33,18 @@ export default class Entity {
   }
 
   draw() {
-    Renderer.rect(
+    Renderer.image(
+      "spritesheet",
+      this.#src,
+      this.#dst
+    );
+
+    /*Renderer.rect(
       this.#dst.x,
       this.#dst.y,
       this.#dst.w,
       this.#dst.h
-    );
+    );*/
   }
 
   // Accessors

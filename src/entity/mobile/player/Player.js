@@ -5,6 +5,8 @@ export default class Player extends Entity {
   constructor(x=0, y=0) {
     super(x, y);
 
+    this.src.set(8, 0);
+
     this.dir.set(1, 0);
     this.vel.set(40, 40);
   }
