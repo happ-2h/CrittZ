@@ -24,6 +24,7 @@ export default class Game {
     this.#player = new Player(60, 40);
 
     AssetHandler.poll("spritesheet", "spritesheet.png");
+    AssetHandler.poll("testMap", "test.json");
 
     AssetHandler.load()
       .then(val  => this.init())
