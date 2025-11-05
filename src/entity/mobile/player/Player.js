@@ -21,6 +21,10 @@ export default class Player extends Entity {
 
     let nextx = this.dst.x + this.vel.x * this.dir.x * dt;
 
+    if (nextx <= 8)        nextx = 8;
+    else if (nextx >= 112) nextx = 112;
+
+
     this.dst.x = nextx;
   }
 };

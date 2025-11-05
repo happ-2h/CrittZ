@@ -69,8 +69,8 @@ class _Renderer {
     this.#ctx.drawImage(
       TextureHandler.getTexture(textureID),
       src.x, src.y, src.w, src.h,
-      dst.x * SCALE,
-      dst.y * SCALE,
+      Math.floor(dst.x * SCALE),
+      Math.floor(dst.y * SCALE),
       dst.w * SCALE,
       dst.h * SCALE
     );
