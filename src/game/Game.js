@@ -1,6 +1,7 @@
 import Player from "../entity/mobile/player/Player";
 import Renderer from "../gfx/Renderer";
 import AssetHandler from "../utils/AssetHandler";
+import MapHandler from "../utils/MapHandler";
 import { SCREEN_HEIGHT, SCREEN_WIDTH } from "./constants";
 
 export default class Game {
@@ -53,6 +54,8 @@ export default class Game {
 
   render() {
     Renderer.clear(this.#cnv.width, this.#cnv.height);
+
+    MapHandler.getMap("testMap").draw();
 
     this.#player.draw();
   }
