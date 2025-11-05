@@ -85,6 +85,21 @@ export default class Rectangle {
     return l&r&t&b;
   }
 
+  /**
+   * @brief Sets new values for the rectangle
+   *
+   * @param {Number} x      - x-position
+   * @param {Number} y      - y-position
+   * @param {Number} width  - Width
+   * @param {Number} height - Height
+   */
+  set(x=0, y=0, width=TILE_SIZE, height=TILE_SIZE) {
+    this.#pos.x = x;
+    this.#pos.y = y;
+    this.#dim.x = width;
+    this.#dim.y = height;
+  }
+
   // Mutators
   set x(x) { this.#pos.x = x; }
   set y(y) { this.#pos.y = y; }
