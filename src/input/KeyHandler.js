@@ -39,6 +39,13 @@ class _KeyHandler {
       case "ArrowRight":
         this.#keys["right"] = true;
         break;
+
+      case "KeyZ":
+        this.#keys["ActionA"] = true;
+        break;
+      case "KeyX":
+        this.#keys["ActionB"] = true;
+        break;
     }
   }
 
@@ -66,6 +73,13 @@ class _KeyHandler {
       case "KeyD":
       case "ArrowRight":
         this.#keys["right"] = false;
+        break;
+
+      case "KeyZ":
+        this.#keys["ActionA"] = false;
+        break;
+      case "KeyX":
+        this.#keys["ActionB"] = false;
         break;
     }
   }

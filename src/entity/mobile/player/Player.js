@@ -1,4 +1,5 @@
 import KeyHandler from "../../../input/KeyHandler";
+import { GRAVITY } from "../../../math/constants";
 import Entity from "../../Entity";
 
 export default class Player extends Entity {
@@ -8,7 +9,7 @@ export default class Player extends Entity {
     this.src.set(8, 0);
 
     this.dir.set(1, 0);
-    this.vel.set(40, 40);
+    this.vel.set(40, 0);
   }
 
   init() {}
@@ -17,14 +18,32 @@ export default class Player extends Entity {
     if (KeyHandler.isDown("right"))     this.dir.x =  1;
     else if (KeyHandler.isDown("left")) this.dir.x = -1;
 
+    if (KeyHandler.isDown("ActionA")) {
+      if (this.isGrounded && !this.isJumping) {
+        this.vel.y = -90;
+        this.isJumping  = true;
+        this.isGrounded = false;
+      }
+    }
+
     this.dir.normalize();
 
+    this.vel.y += GRAVITY * dt;
+
     let nextx = this.dst.x + this.vel.x * this.dir.x * dt;
+    let nexty = this.dst.y + this.vel.y * dt;
 
     if (nextx <= 8)        nextx = 8;
     else if (nextx >= 112) nextx = 112;
 
+    if (nexty >= 40) {
+      nexty = 40;
+      this.vel.y = 0;
+      this.isGrounded = true;
+      this.isJumping  = false;
+    }
 
     this.dst.x = nextx;
+    this.dst.y = nexty;
   }
 };

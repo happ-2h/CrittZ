@@ -2,7 +2,6 @@ import { TILE_SIZE } from "../game/constants";
 import Renderer from "../gfx/Renderer";
 import Rectangle from "../math/shapes/Rectangle";
 import Vec2D from "../math/Vec2D";
-import TextureHandler from "../utils/TextureHandler";
 
 export default class Entity {
   #src;   // Image blit source rectangle
@@ -12,6 +11,10 @@ export default class Entity {
   #dir;   // Directional vector
   #vel;   // Velocity vector
   #accel; // Acceleration vector
+
+  // States
+  #isJumping;  // Is the player jumping
+  #isGrounded; // Is the player on the ground
 
   constructor(x=0, y=0) {
     if (this.constructor === Entity)
@@ -30,6 +33,9 @@ export default class Entity {
     this.#dir   = Vec2D.zero();
     this.#vel   = Vec2D.zero();
     this.#accel = Vec2D.zero();
+
+    this.#isJumping  = false;
+    this.#isGrounded = false;
   }
 
   draw() {
@@ -47,6 +53,10 @@ export default class Entity {
     );*/
   }
 
+  // Mutators
+  set isJumping(j)  { this.#isJumping  = j; }
+  set isGrounded(g) { this.#isGrounded = g; }
+
   // Accessors
   get src()   { return this.#src; }
   get dst()   { return this.#dst; }
@@ -54,4 +64,7 @@ export default class Entity {
   get dir()   { return this.#dir; }
   get vel()   { return this.#vel; }
   get accel() { return this.#accel; }
+
+  get isJumping()  { return this.#isJumping;  }
+  get isGrounded() { return this.#isGrounded; }
 };
