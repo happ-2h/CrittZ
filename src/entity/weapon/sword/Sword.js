@@ -5,7 +5,7 @@ export default class Sword extends Weapon {
   constructor(x=0, y=0) {
     super(x, y);
 
-    this.src.set(16, 0);
+    this.src.set(16, 8);
   }
 
   init() {}
@@ -18,7 +18,7 @@ export default class Sword extends Weapon {
    */
   update(owner, dt) {
     if (this.level === 1) {
-      this.src.x = owner.dir.x === -1 ? 24 : 16;
+      this.src.x = owner.dir.x === -1 ? 16 : 8;
     }
     this.dst.set(
       owner.dst.x + owner.dst.w * owner.dir.x,

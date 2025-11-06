@@ -20,8 +20,14 @@ export default class Player extends Entity {
   init() {}
 
   update(dt) {
-    if (KeyHandler.isDown("right"))     this.dir.x =  1;
-    else if (KeyHandler.isDown("left")) this.dir.x = -1;
+    if (KeyHandler.isDown("right")) {
+      this.dir.x =  1;
+      this.src.x = 8;
+    }
+    else if (KeyHandler.isDown("left")) {
+      this.dir.x = -1;
+      this.src.x = 16;
+    }
 
     if (KeyHandler.isDown("ActionA")) {
       if (this.isGrounded && !this.isJumping) {
