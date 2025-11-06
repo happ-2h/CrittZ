@@ -1,8 +1,11 @@
 import KeyHandler from "../../../input/KeyHandler";
 import { GRAVITY } from "../../../math/constants";
 import Entity from "../../Entity";
+import Sword from "../../weapon/sword/Sword";
 
 export default class Player extends Entity {
+  #weapon;
+
   constructor(x=0, y=0) {
     super(x, y);
 
@@ -10,6 +13,8 @@ export default class Player extends Entity {
 
     this.dir.set(1, 0);
     this.vel.set(40, 0);
+
+    this.#weapon = new Sword(x+8, y);
   }
 
   init() {}
@@ -33,8 +38,10 @@ export default class Player extends Entity {
     let nextx = this.dst.x + this.vel.x * this.dir.x * dt;
     let nexty = this.dst.y + this.vel.y * dt;
 
-    if (nextx <= 8)        nextx = 8;
-    else if (nextx >= 112) nextx = 112;
+    if (nextx <= 8 + this.#weapon.dst.w)
+      nextx = 8 + this.#weapon.dst.w;
+    else if (nextx >= 112 - this.#weapon.dst.w)
+      nextx = 112 - this.#weapon.dst.w;
 
     if (nexty >= 40) {
       nexty = 40;
@@ -45,5 +52,12 @@ export default class Player extends Entity {
 
     this.dst.x = nextx;
     this.dst.y = nexty;
+
+    this.#weapon.update(this, dt);
+  }
+
+  draw() {
+    super.draw();
+    this.#weapon.draw();
   }
 };
