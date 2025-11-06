@@ -1,4 +1,5 @@
 import Enemy from "../entity/mobile/enemy/Enemy";
+import Slime from "../entity/mobile/enemy/slime/Slime";
 import Player from "../entity/mobile/player/Player";
 
 let instance = null;
@@ -18,7 +19,7 @@ class _EntityHandler {
 
   // Add entities
   /**
-   * @brief Adds a player to the list
+   * @brief Adds an entity to the list
    *
    * @param {Player} player - Player entity
    */
@@ -26,6 +27,18 @@ class _EntityHandler {
     // if (player instanceof Player) this.#players.push(player);
     if (entity instanceof Player)     this.#players.push(entity);
     else if (entity instanceof Enemy) this.#enemies.push(entity);
+  }
+
+  /**
+   * @brief Adds a slime to the enemies list
+   */
+  addSlime() {
+    this.add(
+      new Slime(
+        Math.random() * (112 - 8 + 1) + 8,
+        56
+      )
+    );
   }
 
   // Remove entities

@@ -1,4 +1,3 @@
-import Slime from "../entity/mobile/enemy/slime/Slime";
 import Player from "../entity/mobile/player/Player";
 import Renderer from "../gfx/Renderer";
 import AssetHandler from "../utils/AssetHandler";
@@ -12,6 +11,10 @@ export default class Game {
 
   #last; // Holds previous RAF timestamp
 
+  // TEMP
+  #slimeSpawnDelay; // Spawn time for slime
+  #slimeSpawnTimer; // Spawn timer for slime
+
   constructor() {
     this.#cnv = document.querySelector("canvas");
     this.#cnv.width  = SCREEN_WIDTH;
@@ -21,6 +24,10 @@ export default class Game {
     this.#span = document.querySelector("span");
 
     this.#last = performance.now();
+
+    // TEMP
+    this.#slimeSpawnDelay = 0.3;
+    this.#slimeSpawnTimer = 0;
 
     AssetHandler.poll("spritesheet", "spritesheet.png");
     AssetHandler.poll("testMap", "test.json");
@@ -35,12 +42,7 @@ export default class Game {
 
     // TEMP
     EntityHandler.add(new Player(60, 40));
-    EntityHandler.add(
-      new Slime(
-        Math.random() * (112 - 8 + 1) + 8,
-        56
-      )
-    );
+    EntityHandler.addSlime();
 
     this.update(performance.now());
   }
@@ -52,6 +54,12 @@ export default class Game {
     this.#span.textContent = (1/dt).toFixed(3);
 
     requestAnimationFrame(this.update.bind(this));
+
+    this.#slimeSpawnTimer += dt;
+    if (this.#slimeSpawnTimer >= this.#slimeSpawnDelay) {
+      this.#slimeSpawnTimer = 0;
+      EntityHandler.addSlime();
+    }
 
     EntityHandler.updatePlayers(dt);
     EntityHandler.updateEnemies(dt);
