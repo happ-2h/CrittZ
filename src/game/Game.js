@@ -2,6 +2,7 @@ import Slime from "../entity/mobile/enemy/slime/Slime";
 import Player from "../entity/mobile/player/Player";
 import Renderer from "../gfx/Renderer";
 import AssetHandler from "../utils/AssetHandler";
+import EntityHandler from "../utils/EntityHandler";
 import MapHandler from "../utils/MapHandler";
 import { SCREEN_HEIGHT, SCREEN_WIDTH } from "./constants";
 
@@ -10,10 +11,6 @@ export default class Game {
   #span; // Temp span for displaying FPS
 
   #last; // Holds previous RAF timestamp
-
-  // TEMP
-  #player;
-  #slime;
 
   constructor() {
     this.#cnv = document.querySelector("canvas");
@@ -25,24 +22,25 @@ export default class Game {
 
     this.#last = performance.now();
 
-    // TEMP
-    this.#player = new Player(60, 40);
-    this.#slime = new Slime(
-      Math.random() * (112 - 8 + 1) + 8,
-      56
-    );
-
     AssetHandler.poll("spritesheet", "spritesheet.png");
     AssetHandler.poll("testMap", "test.json");
 
     AssetHandler.load()
       .then(val  => this.init())
       .catch(err => console.error(err));
-
   }
 
   init() {
     Renderer.init(this.#cnv.getContext("2d"));
+
+    // TEMP
+    EntityHandler.add(new Player(60, 40));
+    EntityHandler.add(
+      new Slime(
+        Math.random() * (112 - 8 + 1) + 8,
+        56
+      )
+    );
 
     this.update(performance.now());
   }
@@ -55,8 +53,8 @@ export default class Game {
 
     requestAnimationFrame(this.update.bind(this));
 
-    this.#player.update(dt);
-    this.#slime.update(dt);
+    EntityHandler.updatePlayers(dt);
+    EntityHandler.updateEnemies(dt);
 
     this.render();
   }
@@ -66,7 +64,7 @@ export default class Game {
 
     MapHandler.getMap("testMap").draw();
 
-    this.#player.draw();
-    this.#slime.draw();
+    EntityHandler.drawPlayers();
+    EntityHandler.drawEnemies();
   }
 };
