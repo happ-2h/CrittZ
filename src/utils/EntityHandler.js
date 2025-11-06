@@ -37,6 +37,8 @@ class _EntityHandler {
   remove(entity) {
     if (entity instanceof Player)
       this.#players.splice(this.#players.indexOf(entity), 1);
+    else if (entity instanceof Enemy)
+      this.#enemies.splice(this.#enemies.indexOf(entity), 1);
   }
 
   // Update entities
@@ -72,6 +74,32 @@ class _EntityHandler {
   drawEnemies() {
     this.#enemies.forEach(e => e.draw());
   }
+
+  // Get entity
+  /**
+   * @brief Get the player at index n
+   *
+   * @param {Number} n - Index of player
+   * @returns Player at index n
+   */
+  getPlayer(n=0) {
+    return this.#players[n];
+  }
+
+  /**
+   * @brief Get the enemy at index n
+   *
+   * @param {Number} n - Index of the enemy
+   *
+   * @returns Enemy at index n
+   */
+  getEnemy(n=0) {
+    return this.#enemies[n];
+  }
+
+  // Accessors
+  get players() { return this.#players; }
+  get enemies() { return this.#enemies; }
 };
 
 const EntityHandler = new _EntityHandler;
