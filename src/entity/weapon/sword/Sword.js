@@ -1,3 +1,4 @@
+import EntityHandler from "../../../utils/EntityHandler";
 import Entity from "../../Entity";
 import Weapon from "../Weapon";
 
@@ -24,5 +25,11 @@ export default class Sword extends Weapon {
       owner.dst.x + owner.dst.w * owner.dir.x,
       owner.dst.y
     );
+
+    EntityHandler.enemies.forEach(e => {
+      if (this.dst.intersects(e.dst)) {
+        EntityHandler.remove(e);
+      }
+    });
   }
 };
