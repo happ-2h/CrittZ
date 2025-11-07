@@ -8,10 +8,20 @@ export default class Vec2D {
   }
 
   /**
-   *
    * @returns A new (0, 0) vector
    */
   static zero() { return new Vec2D(0, 0); }
+
+  /**
+   * @brief Create a vector from the given angle
+   *
+   * @param {Number} angle - Angle in radians
+   *
+   * @returns New vector
+   */
+  static angToVec(angle) {
+    return new Vec2D(Math.cos(angle), Math.sin(angle));
+  }
 
   /**
    * @brief Normalizes the vector

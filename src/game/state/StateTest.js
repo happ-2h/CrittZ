@@ -31,11 +31,13 @@ export default class StateTest extends State {
 
     EntityHandler.updatePlayers(dt);
     EntityHandler.updateEnemies(dt);
+    EntityHandler.updateParticles(dt);
   }
 
   render() {
     MapHandler.getMap("testMap").draw();
 
+    EntityHandler.drawParticles();
     EntityHandler.drawPlayers();
     EntityHandler.drawEnemies();
   }

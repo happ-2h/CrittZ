@@ -63,13 +63,6 @@ export default class Entity {
       this.#src,
       this.#dst
     );
-
-    /*Renderer.rect(
-      this.#dst.x,
-      this.#dst.y,
-      this.#dst.w,
-      this.#dst.h
-    );*/
   }
 
   incStats() {
@@ -86,6 +79,8 @@ export default class Entity {
   }
 
   // Mutators
+  set dir(d) { this.#dir = d; }
+
   set isJumping(j)  { this.#isJumping  = j; }
   set isGrounded(g) { this.#isGrounded = g; }
 

@@ -1,18 +1,21 @@
 import Enemy from "../entity/mobile/enemy/Enemy";
 import Slime from "../entity/mobile/enemy/slime/Slime";
+import Particle from "../entity/mobile/particle/Particle";
 import Player from "../entity/mobile/player/Player";
 
 let instance = null;
 
 class _EntityHandler {
-  #players; // Player entities
-  #enemies; // Enemy entities
+  #players;   // Player entities
+  #enemies;   // Enemy entities
+  #particles; // Particle entities
 
   constructor() {
     if (instance) throw new Error("EntityHandler singleton reconstructed");
 
-    this.#players = [];
-    this.#enemies = [];
+    this.#players   = [];
+    this.#enemies   = [];
+    this.#particles = [];
 
     instance = this;
   }
@@ -25,8 +28,9 @@ class _EntityHandler {
    */
   add(entity) {
     // if (player instanceof Player) this.#players.push(player);
-    if (entity instanceof Player)     this.#players.push(entity);
-    else if (entity instanceof Enemy) this.#enemies.push(entity);
+    if (entity instanceof Player)        this.#players.push(entity);
+    else if (entity instanceof Enemy)    this.#enemies.push(entity);
+    else if (entity instanceof Particle) this.#particles.push(entity);
   }
 
   /**
@@ -52,6 +56,8 @@ class _EntityHandler {
       this.#players.splice(this.#players.indexOf(entity), 1);
     else if (entity instanceof Enemy)
       this.#enemies.splice(this.#enemies.indexOf(entity), 1);
+    else if (entity instanceof Particle)
+      this.#particles.splice(this.#particles.indexOf(entity), 1);
   }
 
   // Update entities
@@ -73,6 +79,15 @@ class _EntityHandler {
     this.#enemies.forEach(e => e.update(dt));
   }
 
+  /**
+   * @brief Updates particles
+   *
+   * @param {Number} dt - Delta time
+   */
+  updateParticles(dt) {
+    this.#particles.forEach(p => p.update(dt));
+  }
+
   // Draw entities
   /**
    * @brief Draws players
@@ -86,6 +101,13 @@ class _EntityHandler {
    */
   drawEnemies() {
     this.#enemies.forEach(e => e.draw());
+  }
+
+  /**
+   * @brief Draws particles
+   */
+  drawParticles() {
+    this.#particles.forEach(p => p.draw());
   }
 
   // Get entity
@@ -111,8 +133,9 @@ class _EntityHandler {
   }
 
   // Accessors
-  get players() { return this.#players; }
-  get enemies() { return this.#enemies; }
+  get players()   { return this.#players; }
+  get enemies()   { return this.#enemies; }
+  get particles() { return this.#particles; }
 };
 
 const EntityHandler = new _EntityHandler;

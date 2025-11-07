@@ -1,5 +1,6 @@
 import EntityHandler from "../../../utils/EntityHandler";
 import Entity from "../../Entity";
+import ParticleSlime from "../../mobile/particle/ParticleSlime";
 import Weapon from "../Weapon";
 
 export default class Sword extends Weapon {
@@ -36,6 +37,11 @@ export default class Sword extends Weapon {
 
         if (e.stats.hp <= 0) {
           EntityHandler.remove(e);
+
+          EntityHandler.add(new ParticleSlime(e.dst.x, e.dst.y, 4.1887));
+          EntityHandler.add(new ParticleSlime(e.dst.x, e.dst.y, 5.2359));
+          EntityHandler.add(new ParticleSlime(e.dst.x, e.dst.y, 4.7123));
+
           owner.exp += e.exp;
           if (owner.exp >= owner.expNext) owner.levelUp();
         }
