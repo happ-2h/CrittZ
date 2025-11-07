@@ -52,6 +52,8 @@ export default class Slime extends Enemy {
       else if (nextx >= 112) nextx = 112;
 
       this.dst.x = nextx;
+
+      this.src.x = this.dir.x === 1 ? 0 : 8;
     }
   }
 };
