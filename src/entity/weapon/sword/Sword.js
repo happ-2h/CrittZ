@@ -29,6 +29,10 @@ export default class Sword extends Weapon {
     EntityHandler.enemies.forEach(e => {
       if (this.dst.intersects(e.dst)) {
         EntityHandler.remove(e);
+
+        owner.exp += e.exp;
+        if (owner.exp >= owner.expNext) owner.levelUp();
+
       }
     });
   }

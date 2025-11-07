@@ -15,6 +15,9 @@ export default class Player extends Entity {
     this.vel.set(40, 0);
 
     this.#weapon = new Sword(x+8, y);
+
+    this.exp   = 0;
+    this.level = 1;
   }
 
   init() {}
@@ -65,5 +68,10 @@ export default class Player extends Entity {
   draw() {
     super.draw();
     this.#weapon.draw();
+  }
+
+  levelUp() {
+    this.expNext = 10 + 5 * this.level * (this.level - 1);
+    ++this.level;
   }
 };

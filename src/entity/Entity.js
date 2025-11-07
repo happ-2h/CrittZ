@@ -16,6 +16,11 @@ export default class Entity {
   #isJumping;  // Is the player jumping
   #isGrounded; // Is the player on the ground
 
+  // Stats
+  #exp;     // Experience points
+  #expNext; // Experience needed to level up
+  #level;   // Level number
+
   constructor(x=0, y=0) {
     if (this.constructor === Entity)
       throw new Error("Cannot instantiate abstract class");
@@ -36,6 +41,10 @@ export default class Entity {
 
     this.#isJumping  = false;
     this.#isGrounded = false;
+
+    this.#exp     = 0;
+    this.#expNext = 0;
+    this.#level   = 1;
   }
 
   draw() {
@@ -57,6 +66,10 @@ export default class Entity {
   set isJumping(j)  { this.#isJumping  = j; }
   set isGrounded(g) { this.#isGrounded = g; }
 
+  set exp(e)        { this.#exp = e;     }
+  set expNext(e)    { this.#expNext = e; }
+  set level(l)      { this.#level = l;   }
+
   // Accessors
   get src()   { return this.#src; }
   get dst()   { return this.#dst; }
@@ -67,4 +80,8 @@ export default class Entity {
 
   get isJumping()  { return this.#isJumping;  }
   get isGrounded() { return this.#isGrounded; }
+
+  get exp()     { return this.#exp; }
+  get expNext() { return this.#expNext; }
+  get level()   { return this.#level; }
 };

@@ -18,6 +18,8 @@ export default class Slime extends Enemy {
       (Math.random() > 0.5 ? 1 : -1),
       -1
     );
+
+    this.exp = 2;
   }
 
   init() {}
