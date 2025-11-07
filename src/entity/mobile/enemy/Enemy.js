@@ -7,6 +7,7 @@ export default class Enemy extends Entity {
     super(x, y);
 
     this.#state = 0;
+    this.stats.hp = 1;
   }
 
   // Mutators

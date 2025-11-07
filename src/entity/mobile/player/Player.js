@@ -1,10 +1,13 @@
 import KeyHandler from "../../../input/KeyHandler";
 import { GRAVITY } from "../../../math/constants";
+import EntityHandler from "../../../utils/EntityHandler";
 import Entity from "../../Entity";
 import Sword from "../../weapon/sword/Sword";
 
 export default class Player extends Entity {
-  #weapon;
+  #weapon;   // Current weapon
+  #invDelay; // Invincibility delay
+  #invTimer; // Invincibility timer
 
   constructor(x=0, y=0) {
     super(x, y);
@@ -18,6 +21,10 @@ export default class Player extends Entity {
 
     this.exp   = 0;
     this.level = 1;
+    this.stats.hp = 50;
+
+    this.#invDelay = 0.5;
+    this.#invTimer = 0;
   }
 
   init() {}
@@ -61,6 +68,24 @@ export default class Player extends Entity {
 
     this.dst.x = nextx;
     this.dst.y = nexty;
+
+    if (this.#invTimer <= 0) {
+      EntityHandler.enemies.forEach(e => {
+        if (this.dst.intersects(e.dst)) {
+          let damage = e.stats.atk - this.stats.def;
+
+          if (damage <= 0) damage = 1;
+
+          this.stats.hp -= damage;
+
+          this.#invTimer = this.#invDelay;
+
+          if (this.stats.hp <= 0)
+            console.log("GAME OVER");
+        }
+      });
+    }
+    else this.#invTimer -= dt;
 
     this.#weapon.update(this, dt);
   }

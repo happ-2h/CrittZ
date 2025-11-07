@@ -7,6 +7,7 @@ export default class Sword extends Weapon {
     super(x, y);
 
     this.src.set(16, 8);
+    this.stats.atk = 1;
   }
 
   init() {}
@@ -28,10 +29,16 @@ export default class Sword extends Weapon {
 
     EntityHandler.enemies.forEach(e => {
       if (this.dst.intersects(e.dst)) {
-        EntityHandler.remove(e);
+        let damage = owner.stats.atk + this.stats.atk - e.stats.def;
+        if (damage <= 0) damage = 1;
 
-        owner.exp += e.exp;
-        if (owner.exp >= owner.expNext) owner.levelUp();
+        e.stats.hp -= damage;
+
+        if (e.stats.hp <= 0) {
+          EntityHandler.remove(e);
+          owner.exp += e.exp;
+          if (owner.exp >= owner.expNext) owner.levelUp();
+        }
       }
     });
   }

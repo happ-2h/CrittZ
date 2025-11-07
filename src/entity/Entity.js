@@ -47,6 +47,7 @@ export default class Entity {
     this.#expNext = 0;
     this.#level   = 1;
     this.#stats = {
+      hp:   0,
       atk:  0,
       def:  0,
       luck: 0,
@@ -72,6 +73,7 @@ export default class Entity {
   }
 
   incStats() {
+    this.#stats.hp   += 1;
     this.#stats.atk  += this.#stats.rate;
     this.#stats.def  += this.#stats.rate;
     this.#stats.luck += this.#stats.rate;
