@@ -73,5 +73,6 @@ export default class Player extends Entity {
   levelUp() {
     this.expNext = 10 + 5 * this.level * (this.level - 1);
     ++this.level;
+    this.incStats();
   }
 };

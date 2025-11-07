@@ -32,7 +32,6 @@ export default class Sword extends Weapon {
 
         owner.exp += e.exp;
         if (owner.exp >= owner.expNext) owner.levelUp();
-
       }
     });
   }

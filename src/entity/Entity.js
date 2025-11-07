@@ -20,6 +20,7 @@ export default class Entity {
   #exp;     // Experience points
   #expNext; // Experience needed to level up
   #level;   // Level number
+  #stats;   // Stats object
 
   constructor(x=0, y=0) {
     if (this.constructor === Entity)
@@ -45,6 +46,14 @@ export default class Entity {
     this.#exp     = 0;
     this.#expNext = 0;
     this.#level   = 1;
+    this.#stats = {
+      atk:  0,
+      def:  0,
+      luck: 0,
+      spd:  0,
+      rate: 0.2,
+      cap:  5
+    };
   }
 
   draw() {
@@ -60,6 +69,18 @@ export default class Entity {
       this.#dst.w,
       this.#dst.h
     );*/
+  }
+
+  incStats() {
+    this.#stats.atk  += this.#stats.rate;
+    this.#stats.def  += this.#stats.rate;
+    this.#stats.luck += this.#stats.rate;
+    this.#stats.spd  += this.#stats.rate;
+
+    if (this.#stats.atk  >= this.#stats.cap) this.#stats.atk  = this.#stats.cap;
+    if (this.#stats.def  >= this.#stats.cap) this.#stats.def  = this.#stats.cap;
+    if (this.#stats.luck >= this.#stats.cap) this.#stats.luck = this.#stats.cap;
+    if (this.#stats.spd  >= this.#stats.cap) this.#stats.spd  = this.#stats.cap;
   }
 
   // Mutators
@@ -81,7 +102,8 @@ export default class Entity {
   get isJumping()  { return this.#isJumping;  }
   get isGrounded() { return this.#isGrounded; }
 
-  get exp()     { return this.#exp; }
+  get exp()     { return this.#exp;     }
   get expNext() { return this.#expNext; }
-  get level()   { return this.#level; }
+  get level()   { return this.#level;   }
+  get stats()   { return this.#stats;   }
 };
