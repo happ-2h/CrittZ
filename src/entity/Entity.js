@@ -22,6 +22,12 @@ export default class Entity {
   #level;   // Level number
   #stats;   // Stats object
 
+  // Animation
+  #frame;      // Current frame
+  #frames;     // Frame container (only 2)
+  #frameTimer; // Frame change timer
+  #frameDelay; // Frame change delay
+
   constructor(x=0, y=0) {
     if (this.constructor === Entity)
       throw new Error("Cannot instantiate abstract class");
@@ -55,8 +61,16 @@ export default class Entity {
       rate: 0.2,
       cap:  5
     };
+
+    this.#frame  = 0;
+    this.#frames = [0, 0];
+    this.#frameTimer = 0;
+    this.#frameDelay = 0;
   }
 
+  /**
+   * @brief Draws the entity
+   */
   draw() {
     Renderer.image(
       "spritesheet",
@@ -65,6 +79,9 @@ export default class Entity {
     );
   }
 
+  /**
+   * @brief Increases stats
+   */
   incStats() {
     this.#stats.hp   += 1;
     this.#stats.atk  += this.#stats.rate;
@@ -78,6 +95,41 @@ export default class Entity {
     if (this.#stats.spd  >= this.#stats.cap) this.#stats.spd  = this.#stats.cap;
   }
 
+  /**
+   * @brief Performs animation calculations
+   *
+   * @param {Number} dt - Delta time
+   */
+  animate(dt) {
+    this.#frameTimer += dt;
+
+    if (this.#frameTimer >= this.#frameDelay) {
+      this.#frameTimer = 0;
+      this.#frame = this.#frame + 1 >= this.#frames.length ? 0 : this.#frame + 1;
+
+      this.#src.x = (this.#frames[this.#frame]&0x1F)<<3;
+      this.#src.y = (this.#frames[this.#frame]>>5)  <<3;
+    }
+  }
+
+  /**
+   * @brief Sets animation frames
+   *
+   * @param {Number} frame1 - Tile number based on the spritesheet
+   * @param {Number} frame2 - Tile number based on the spritesheet
+   */
+  setFrames(frame1=0, frame2=0) {
+    // Ignore if requesting duplicate
+    if (frame1 === this.#frames[0] && frame2 === this.#frames[1]) return;
+
+    // Reset previous frame
+    this.#frame      = 0;
+    this.#frameTimer = this.#frameDelay;
+
+    this.#frames[0]  = frame1;
+    this.#frames[1]  = frame2;
+  }
+
   // Mutators
   set dir(d) { this.#dir = d; }
 
@@ -87,6 +139,8 @@ export default class Entity {
   set exp(e)        { this.#exp = e;     }
   set expNext(e)    { this.#expNext = e; }
   set level(l)      { this.#level = l;   }
+
+  set frameDelay(f) { this.#frameDelay = f; }
 
   // Accessors
   get src()   { return this.#src; }

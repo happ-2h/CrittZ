@@ -20,6 +20,11 @@ export default class Slime extends Enemy {
     );
 
     this.exp = 2;
+
+    this.frameDelay = 0.2;
+
+    if (this.dir.x === 1)       this.setFrames(64, 66);
+    else if (this.dir.x === -1) this.setFrames(65, 67);
   }
 
   init() {}
@@ -46,6 +51,9 @@ export default class Slime extends Enemy {
         this.dir.x *= -1;
         this.#dirTimer = 0;
         this.#dirDelay = Math.random() * 3;
+
+        if (this.dir.x === 1)       this.setFrames(64, 66);
+        else if (this.dir.x === -1) this.setFrames(65, 67);
       }
 
       let nextx = this.dst.x + this.vel.x * this.dir.x * dt;
@@ -54,8 +62,8 @@ export default class Slime extends Enemy {
       else if (nextx >= 112) nextx = 112;
 
       this.dst.x = nextx;
-
-      this.src.x = this.dir.x === 1 ? 0 : 8;
     }
+
+    this.animate(dt);
   }
 };

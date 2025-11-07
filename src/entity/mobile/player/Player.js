@@ -25,6 +25,10 @@ export default class Player extends Entity {
 
     this.#invDelay = 0.5;
     this.#invTimer = 0;
+
+    this.frameDelay = 0.2;
+
+    this.setFrames(1, 3);
   }
 
   init() {}
@@ -32,11 +36,11 @@ export default class Player extends Entity {
   update(dt) {
     if (KeyHandler.isDown("right")) {
       this.dir.x =  1;
-      this.src.x = 8;
+      this.setFrames(1, 3, 0.5);
     }
     else if (KeyHandler.isDown("left")) {
       this.dir.x = -1;
-      this.src.x = 16;
+      this.setFrames(2, 4, 0.5);
     }
 
     if (KeyHandler.isDown("ActionA")) {
@@ -88,6 +92,7 @@ export default class Player extends Entity {
     else this.#invTimer -= dt;
 
     this.#weapon.update(this, dt);
+    this.animate(dt);
   }
 
   draw() {
