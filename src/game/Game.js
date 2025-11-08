@@ -2,7 +2,7 @@ import Renderer from "../gfx/Renderer";
 import AssetHandler from "../utils/AssetHandler";
 import StateHandler from "../utils/StateHandler";
 import { SCREEN_HEIGHT, SCREEN_WIDTH } from "./constants";
-import StateTest from "./state/StateTest";
+import StateTitleScreen from "./state/StateTitleScreen";
 
 export default class Game {
   #cnv;  // HTML5 canvas reference
@@ -31,7 +31,7 @@ export default class Game {
   init() {
     Renderer.init(this.#cnv.getContext("2d"));
 
-    StateHandler.push(new StateTest);
+    StateHandler.push(new StateTitleScreen);
 
     this.update(performance.now());
   }
