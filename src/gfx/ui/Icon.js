@@ -21,4 +21,6 @@ export default class Icon {
       this.#dst
     );
   }
+
+  get dst() { return this.#dst; }
 };

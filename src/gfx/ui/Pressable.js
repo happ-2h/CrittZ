@@ -135,4 +135,7 @@ export default class Pressable {
   press() {
     this.#cb();
   }
+
+  // Accessors
+  get iconDst() { return this.#icon.dst; }
 };
