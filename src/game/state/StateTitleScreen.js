@@ -9,9 +9,6 @@ import State from "./State";
 export default class StateTitleScreen extends State {
   #selection;      // Menu item selection
 
-  #inputTimer;
-  #inputDelay;
-
   // UI
   #logo;           // Game logo
   #press_shop;     // Shop pressable
@@ -23,9 +20,6 @@ export default class StateTitleScreen extends State {
     super();
 
     this.#selection = 0;
-
-    this.#inputTimer = 0;
-    this.#inputDelay = 0.2;
 
     this.#logo = new Icon(
       new Rectangle(0, 88, 96, 40),
@@ -62,30 +56,24 @@ export default class StateTitleScreen extends State {
   init() {}
 
   update(dt) {
-    this.#inputTimer += dt;
+    if (KeyHandler.isPressed("left"))
+      this.#selection = this.#selection === 0 ? 2 : this.#selection - 1;
+    else if (KeyHandler.isPressed("right"))
+      this.#selection = this.#selection === 2 ? 0 : this.#selection + 1;
 
-    if (this.#inputTimer >= this.#inputDelay) {
-      this.#inputTimer = 0;
 
-      if (KeyHandler.isDown("left")) {
-        this.#selection = this.#selection === 0 ? 2 : this.#selection - 1;
-      }
-      else if (KeyHandler.isDown("right")) {
-        this.#selection = this.#selection === 2 ? 0 : this.#selection + 1;
-      }
-
-      if (this.#selection === 0) {
-        this.#cursor.x = this.#press_shop.iconDst.x;
-      }
-      else if (this.#selection === 1) {
-        this.#cursor.x = this.#press_play.iconDst.x;
-      }
-      else if (this.#selection === 2) {
-        this.#cursor.x = this.#press_settings.iconDst.x;
-      }
+    if (this.#selection === 0) {
+      this.#cursor.x = this.#press_shop.iconDst.x;
+    }
+    else if (this.#selection === 1) {
+      this.#cursor.x = this.#press_play.iconDst.x;
+    }
+    else if (this.#selection === 2) {
+      this.#cursor.x = this.#press_settings.iconDst.x;
     }
 
     this.#cursor.update(dt);
+    KeyHandler.update();
   }
 
   render() {
