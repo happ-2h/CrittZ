@@ -1,4 +1,4 @@
-import { SCALE, TILE_SIZE } from "../game/constants";
+import { SCALE, SCREEN_HEIGHT, SCREEN_WIDTH, TILE_SIZE } from "../game/constants";
 import Rectangle from "../math/shapes/Rectangle";
 import TextureHandler from "../utils/TextureHandler";
 
@@ -74,6 +74,32 @@ class _Renderer {
       dst.w * SCALE,
       dst.h * SCALE
     );
+  }
+
+  // Utils
+  /**
+   * @brief Gets image data from a specified portion of the canvas
+   *
+   * @param {Number} x      - x-position to blit
+   * @param {Number} y      - y-position to blit
+   * @param {Number} width  - Width of the blit
+   * @param {Number} height - Height of the blit
+   *
+   * @returns ImageData object
+   */
+  imageData(x=0, y=0, width=SCREEN_WIDTH, height=SCREEN_HEIGHT) {
+    return this.#ctx.getImageData(x, y, width, height);
+  }
+
+  /**
+   * @brief Puts the provided image data onto the canvas
+   *
+   * @param {ImageData} imageData - ImageData object
+   * @param {Number} x            - x-position to place the image data
+   * @param {Number} y            - y-position to place the image data
+   */
+  putImageData(imageData, x, y) {
+    this.#ctx.putImageData(imageData, x, y);
   }
 };
 
