@@ -1,5 +1,6 @@
 import Enemy from "../entity/mobile/enemy/Enemy";
 import Slime from "../entity/mobile/enemy/slime/Slime";
+import Character from "../entity/mobile/npc/Character";
 import Particle from "../entity/mobile/particle/Particle";
 import Player from "../entity/mobile/player/Player";
 
@@ -9,6 +10,7 @@ class _EntityHandler {
   #players;   // Player entities
   #enemies;   // Enemy entities
   #particles; // Particle entities
+  #npcs;      // NPC/uncategorized entities
 
   constructor() {
     if (instance) throw new Error("EntityHandler singleton reconstructed");
@@ -16,6 +18,7 @@ class _EntityHandler {
     this.#players   = [];
     this.#enemies   = [];
     this.#particles = [];
+    this.#npcs      = [];
 
     instance = this;
   }
@@ -28,9 +31,10 @@ class _EntityHandler {
    */
   add(entity) {
     // if (player instanceof Player) this.#players.push(player);
-    if (entity instanceof Player)        this.#players.push(entity);
-    else if (entity instanceof Enemy)    this.#enemies.push(entity);
-    else if (entity instanceof Particle) this.#particles.push(entity);
+    if (entity instanceof Player)         this.#players.push(entity);
+    else if (entity instanceof Enemy)     this.#enemies.push(entity);
+    else if (entity instanceof Particle)  this.#particles.push(entity);
+    else if (entity instanceof Character) this.#npcs.push(entity);
   }
 
   /**
@@ -47,9 +51,9 @@ class _EntityHandler {
 
   // Remove entities
   /**
-   * @brief Removes player from the list
+   * @brief Removes entity from the list
    *
-   * @param {Player} player - Player entity to remove
+   * @param {Player} entity - Entity to remove
    */
   remove(entity) {
     if (entity instanceof Player)
@@ -88,6 +92,15 @@ class _EntityHandler {
     this.#particles.forEach(p => p.update(dt));
   }
 
+  /**
+   * @brief Updates NPCs
+   *
+   * @param {Number} dt - Delta time
+   */
+  updateNPCs(dt) {
+    this.#npcs.forEach(n => n.update(dt));
+  }
+
   // Draw entities
   /**
    * @brief Draws players
@@ -108,6 +121,13 @@ class _EntityHandler {
    */
   drawParticles() {
     this.#particles.forEach(p => p.draw());
+  }
+
+  /**
+   * @brief Draws NPCs
+   */
+  drawNPCs() {
+    this.#npcs.forEach(n => n.draw());
   }
 
   // Get entity

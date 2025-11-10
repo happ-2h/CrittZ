@@ -36,11 +36,11 @@ export default class Player extends Entity {
   update(dt) {
     if (KeyHandler.isDown("right")) {
       this.dir.x =  1;
-      this.setFrames(1, 3, 0.5);
+      this.setFrames(1, 3);
     }
     else if (KeyHandler.isDown("left")) {
       this.dir.x = -1;
-      this.setFrames(2, 4, 0.5);
+      this.setFrames(2, 4);
     }
 
     if (KeyHandler.isDown("ActionA")) {

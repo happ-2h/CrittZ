@@ -1,9 +1,11 @@
+import Character from "../../entity/mobile/npc/Character";
 import Cursor from "../../gfx/ui/Cursor";
 import Icon from "../../gfx/ui/Icon";
 import Pressable from "../../gfx/ui/Pressable";
 import KeyHandler from "../../input/KeyHandler";
 import Rectangle from "../../math/shapes/Rectangle";
 import Vec2D from "../../math/Vec2D";
+import EntityHandler from "../../utils/EntityHandler";
 import State from "./State";
 
 export default class StateTitleScreen extends State {
@@ -48,12 +50,17 @@ export default class StateTitleScreen extends State {
     );
 
     this.#cursor = new Cursor(this.#press_shop.iconDst.x, 48);
+
+    this.init();
   }
 
   onEnter() {}
   onExit()  {}
 
-  init() {}
+  init() {
+    EntityHandler.add(new Character([1, 3], [2, 4]));
+    EntityHandler.add(new Character([64, 66], [65, 67]));
+  }
 
   update(dt) {
     if (KeyHandler.isPressed("left"))
@@ -74,9 +81,13 @@ export default class StateTitleScreen extends State {
 
     this.#cursor.update(dt);
     KeyHandler.update();
+
+    EntityHandler.updateNPCs(dt);
   }
 
   render() {
+    EntityHandler.drawNPCs();
+
     this.#logo.draw();
     this.#press_shop.draw();
     this.#press_play.draw();
