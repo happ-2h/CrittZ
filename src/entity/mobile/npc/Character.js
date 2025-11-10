@@ -36,7 +36,7 @@ export default class Character extends Entity {
     this.#dirDelay = 3;
 
     this.#jumpTimer = 0;
-    this.#jumpDelay = 3;
+    this.#jumpDelay = Math.random() * 3;
 
     this.dir.x === 1 ?
       this.setFrames(this.#frames[0][0], this.#frames[0][1]) :
