@@ -62,7 +62,7 @@ class _KeyHandler {
         this.#keys["ActionA"] = true;
 
         if (!this.#pressedKeys["ActionA"]) this.#newKeys.push("ActionA");
-        this.#pressedKeys["up"] = true;
+        this.#pressedKeys["ActionA"] = true;
         break;
       case "KeyX":
         this.#keys["ActionB"] = true;

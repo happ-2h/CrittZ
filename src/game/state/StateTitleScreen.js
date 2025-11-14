@@ -7,8 +7,10 @@ import KeyHandler from "../../input/KeyHandler";
 import Rectangle from "../../math/shapes/Rectangle";
 import Vec2D from "../../math/Vec2D";
 import EntityHandler from "../../utils/EntityHandler";
+import StateHandler from "../../utils/StateHandler";
 import { SCREEN_HEIGHT, SCREEN_WIDTH } from "../constants";
 import State from "./State";
+import StatePlay from "./StatePlay";
 
 export default class StateTitleScreen extends State {
   #selection;      // Menu item selection
@@ -85,6 +87,14 @@ export default class StateTitleScreen extends State {
       this.#selection = this.#selection === 0 ? 2 : this.#selection - 1;
     else if (KeyHandler.isPressed("right"))
       this.#selection = this.#selection === 2 ? 0 : this.#selection + 1;
+    else if (KeyHandler.isPressed("ActionA")) {
+      if (this.#selection === 0) {}
+      else if (this.#selection === 1) {
+        StateHandler.pop();
+        StateHandler.push(new StatePlay);
+      }
+      else if (this.#selection === 2) {}
+    }
 
     // Move cursor based on focused item
     if (this.#selection === 0)
