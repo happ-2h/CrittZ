@@ -14,13 +14,20 @@ export default class Icon {
     this.#dst = dst;
   }
 
-  draw() {
+  /**
+   * @brief Draws the icon
+   *
+   * @param {String} textureID - ID of the texture
+   */
+  draw(textureID="spritesheet") {
     Renderer.image(
-      "spritesheet",
+      textureID,
       this.#src,
       this.#dst
     );
   }
 
+  // Accessors
   get dst() { return this.#dst; }
+  get src() { return this.#src; }
 };

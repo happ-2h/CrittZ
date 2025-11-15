@@ -1,4 +1,5 @@
 import Renderer from "../gfx/Renderer";
+import Skin from "../gfx/ui/Skin";
 import AssetHandler from "../utils/AssetHandler";
 import StateHandler from "../utils/StateHandler";
 import { SCREEN_HEIGHT, SCREEN_WIDTH } from "./constants";
@@ -21,6 +22,7 @@ export default class Game {
     this.#last = performance.now();
 
     AssetHandler.poll("spritesheet", "spritesheet.png");
+    AssetHandler.poll("skins", "skins.png");
     AssetHandler.poll("testMap", "test.json");
 
     AssetHandler.load()
@@ -32,6 +34,9 @@ export default class Game {
     Renderer.init(this.#cnv.getContext("2d"));
 
     StateHandler.push(new StateTitleScreen);
+
+    // TEMP load save file
+    Skin.loadSkins();
 
     this.update(performance.now());
   }

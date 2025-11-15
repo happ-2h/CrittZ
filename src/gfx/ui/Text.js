@@ -91,4 +91,14 @@ export default class Text {
   draw() {
     this.#imgs.forEach(i => i.draw());
   }
+
+  // Accessors
+  get text() { return this.#text; }
+
+  // Mutators
+  set text(t) {
+    this.#text = t.toString().toLowerCase().trim();
+    this.#imgs.length = 0;
+    this.parse();
+  }
 };

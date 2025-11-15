@@ -1,4 +1,5 @@
 import Player from "../../entity/mobile/player/Player";
+import Skin from "../../gfx/ui/Skin";
 import EntityHandler from "../../utils/EntityHandler";
 import MapHandler from "../../utils/MapHandler";
 import State from "./State";
@@ -69,6 +70,8 @@ export default class StatePlay extends State {
     EntityHandler.updatePlayers(dt);
     EntityHandler.updateEnemies(dt);
     EntityHandler.updateParticles(dt);
+
+    Skin.update(dt);
   }
 
   render() {
@@ -77,5 +80,7 @@ export default class StatePlay extends State {
     EntityHandler.drawParticles();
     EntityHandler.drawPlayers();
     EntityHandler.drawEnemies();
+
+    Skin.draw();
   }
 };

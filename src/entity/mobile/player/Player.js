@@ -1,3 +1,4 @@
+import Skin from "../../../gfx/ui/Skin";
 import KeyHandler from "../../../input/KeyHandler";
 import { GRAVITY } from "../../../math/constants";
 import EntityHandler from "../../../utils/EntityHandler";
@@ -104,5 +105,7 @@ export default class Player extends Entity {
     this.expNext = 10 + 5 * this.level * (this.level - 1);
     ++this.level;
     this.incStats();
+
+    Skin.setLevel(this.level);
   }
 };
