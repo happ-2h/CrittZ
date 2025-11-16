@@ -21,6 +21,7 @@ class _Skin {
 
   #txtLevel; // Player level number
   #txtCoins; // Player collected coins
+  #txtTime;  // Remaining wave time
 
   constructor() {
     if (instance) throw new Error("Skin singleton reconstructed");
@@ -97,6 +98,11 @@ class _Skin {
       new Vec2D(104, 0)
     );
 
+    this.#txtTime = new Text(
+      "60",
+      new Vec2D(56, 0)
+    );
+
     instance = this;
   }
 
@@ -150,6 +156,7 @@ class _Skin {
 
     this.#txtLevel.draw();
     this.#txtCoins.draw();
+    this.#txtTime.draw();
   }
 
   /**
@@ -159,6 +166,16 @@ class _Skin {
    */
   setLevel(level) {
     this.#txtLevel.text = level.toString().padStart(3, '0');
+  }
+
+  /**
+   * @brief Updates the time number shown
+   *
+   * @param {Number} time - Time value
+   */
+  setTime(time) {
+    time |= 0;
+    this.#txtTime.text = time.toString().padStart(2, '0');
   }
 };
 

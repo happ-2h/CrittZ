@@ -50,7 +50,7 @@ export default class StatePlay extends State {
     else if (this.#state === 1) {
       this.#time -= dt;
       if (this.#time <= 0) {
-        this.#time = 1;
+        this.#time = 0;
       }
 
       this.#spawnTimer += dt;
@@ -61,6 +61,8 @@ export default class StatePlay extends State {
           EntityHandler.addSlime();
         }
       }
+
+      Skin.setTime(this.#time);
     }
     // TODO Boss introduction
     else if (this.#state === 2) {}
