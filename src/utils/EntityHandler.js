@@ -2,6 +2,7 @@ import Enemy from "../entity/mobile/enemy/Enemy";
 import Slime from "../entity/mobile/enemy/slime/Slime";
 import Character from "../entity/mobile/npc/Character";
 import Particle from "../entity/mobile/particle/Particle";
+import ParticleSlime from "../entity/mobile/particle/ParticleSlime";
 import Player from "../entity/mobile/player/Player";
 
 let instance = null;
@@ -62,6 +63,16 @@ class _EntityHandler {
       this.#enemies.splice(this.#enemies.indexOf(entity), 1);
     else if (entity instanceof Particle)
       this.#particles.splice(this.#particles.indexOf(entity), 1);
+  }
+
+  removeEnemies() {
+    this.#enemies.forEach(e => {
+      this.remove(e);
+
+      this.add(new ParticleSlime(e.dst.x, e.dst.y, 4.1887));
+      this.add(new ParticleSlime(e.dst.x, e.dst.y, 5.2359));
+      this.add(new ParticleSlime(e.dst.x, e.dst.y, 4.7123));
+    });
   }
 
   // Update entities
