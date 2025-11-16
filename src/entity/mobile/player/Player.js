@@ -7,8 +7,6 @@ import Sword from "../../weapon/sword/Sword";
 
 export default class Player extends Entity {
   #weapon;   // Current weapon
-  #invDelay; // Invincibility delay
-  #invTimer; // Invincibility timer
 
   constructor(x=0, y=0) {
     super(x, y);
@@ -22,10 +20,8 @@ export default class Player extends Entity {
 
     this.exp   = 0;
     this.level = 1;
-    this.stats.hp = 50;
-
-    this.#invDelay = 0.5;
-    this.#invTimer = 0;
+    this.stats.hp    = 50;
+    this.stats.maxHp = 50;
 
     this.frameDelay = 0.2;
 
@@ -74,7 +70,7 @@ export default class Player extends Entity {
     this.dst.x = nextx;
     this.dst.y = nexty;
 
-    if (this.#invTimer <= 0) {
+    if (this.invTimer <= 0) {
       EntityHandler.enemies.forEach(e => {
         if (this.dst.intersects(e.dst)) {
           let damage = e.stats.atk - this.stats.def;
@@ -83,14 +79,14 @@ export default class Player extends Entity {
 
           this.stats.hp -= damage;
 
-          this.#invTimer = this.#invDelay;
+          this.invTimer = this.invDelay;
 
           if (this.stats.hp <= 0)
             console.log("GAME OVER");
         }
       });
     }
-    else this.#invTimer -= dt;
+    else this.invTimer -= dt;
 
     this.#weapon.update(this, dt);
     this.animate(dt);

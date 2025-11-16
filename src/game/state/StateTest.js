@@ -1,6 +1,8 @@
+import BossSlime from "../../entity/mobile/enemy/boss/BossSlime";
 import Player from "../../entity/mobile/player/Player";
 import EntityHandler from "../../utils/EntityHandler";
 import MapHandler from "../../utils/MapHandler";
+import { GAME_WIDTH } from "../constants";
 import State from "./State";
 
 export default class StateTest extends State {
@@ -16,13 +18,14 @@ export default class StateTest extends State {
 
   onEnter() {
     EntityHandler.add(new Player(60, 40));
+    EntityHandler.add(new BossSlime(GAME_WIDTH, 32));
   }
   onExit()  {}
 
   init() {}
 
   update(dt) {
-    this.#slimeSpawnTimer += dt;
+    // this.#slimeSpawnTimer += dt;
 
     if (this.#slimeSpawnTimer >= this.#slimeSpawnDelay) {
       this.#slimeSpawnTimer = 0;

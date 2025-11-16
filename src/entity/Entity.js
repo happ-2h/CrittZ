@@ -15,6 +15,7 @@ export default class Entity {
   // States
   #isJumping;  // Is the player jumping
   #isGrounded; // Is the player on the ground
+  #isHurt;     // Has the entitiy been hurt
 
   // Stats
   #exp;     // Experience points
@@ -27,6 +28,10 @@ export default class Entity {
   #frames;     // Frame container (only 2)
   #frameTimer; // Frame change timer
   #frameDelay; // Frame change delay
+
+  // Other
+  #invTimer; // Invincibility timer
+  #invDelay; // Invincibility delay
 
   constructor(x=0, y=0) {
     if (this.constructor === Entity)
@@ -48,24 +53,29 @@ export default class Entity {
 
     this.#isJumping  = false;
     this.#isGrounded = false;
+    this.#isHurt     = false;
 
     this.#exp     = 0;
     this.#expNext = 0;
     this.#level   = 1;
     this.#stats = {
-      hp:   0,
-      atk:  0,
-      def:  0,
-      luck: 0,
-      spd:  0,
-      rate: 0.2,
-      cap:  5
+      hp:    0,
+      maxHp: 0,
+      atk:   0,
+      def:   0,
+      luck:  0,
+      spd:   0,
+      rate:  0.2,
+      cap:   5
     };
 
     this.#frame  = 0;
     this.#frames = [0, 0];
     this.#frameTimer = 0;
     this.#frameDelay = 0;
+
+    this.#invTimer = 0;
+    this.#invDelay = 0.5;
   }
 
   /**
@@ -83,11 +93,11 @@ export default class Entity {
    * @brief Increases stats
    */
   incStats() {
-    this.#stats.hp   += 1;
-    this.#stats.atk  += this.#stats.rate;
-    this.#stats.def  += this.#stats.rate;
-    this.#stats.luck += this.#stats.rate;
-    this.#stats.spd  += this.#stats.rate;
+    this.#stats.maxHp += 1 * (Math.floor(this.#level / 2));
+    this.#stats.atk   += this.#stats.rate;
+    this.#stats.def   += this.#stats.rate;
+    this.#stats.luck  += this.#stats.rate;
+    this.#stats.spd   += this.#stats.rate;
 
     if (this.#stats.atk  >= this.#stats.cap) this.#stats.atk  = this.#stats.cap;
     if (this.#stats.def  >= this.#stats.cap) this.#stats.def  = this.#stats.cap;
@@ -98,17 +108,24 @@ export default class Entity {
   /**
    * @brief Performs animation calculations
    *
-   * @param {Number} dt - Delta time
+   * @param {Number} dt       - Delta time
+   * @param {Boolean} isLarge - Is sprite 16x16?
    */
-  animate(dt) {
+  animate(dt, isLarge=false) {
     this.#frameTimer += dt;
 
     if (this.#frameTimer >= this.#frameDelay) {
       this.#frameTimer = 0;
       this.#frame = this.#frame + 1 >= this.#frames.length ? 0 : this.#frame + 1;
 
-      this.#src.x = (this.#frames[this.#frame]&0x1F)<<3;
-      this.#src.y = (this.#frames[this.#frame]>>5)  <<3;
+      if (!isLarge) {
+        this.#src.x = (this.#frames[this.#frame]&0x1F)<<3;
+        this.#src.y = (this.#frames[this.#frame]>>5)  <<3;
+      }
+      else {
+        this.#src.x = (this.#frames[this.#frame]&0xF)<<4;
+        this.#src.y = (this.#frames[this.#frame]>>4) <<4;
+      }
     }
   }
 
@@ -135,12 +152,16 @@ export default class Entity {
 
   set isJumping(j)  { this.#isJumping  = j; }
   set isGrounded(g) { this.#isGrounded = g; }
+  set isHurt(h)     { this.#isHurt     = h; }
 
   set exp(e)        { this.#exp = e;     }
   set expNext(e)    { this.#expNext = e; }
   set level(l)      { this.#level = l;   }
 
   set frameDelay(f) { this.#frameDelay = f; }
+
+  set invTimer(i) { this.#invTimer = i; }
+  set invDelay(d) { this.#invDelay = d; }
 
   // Accessors
   get src()   { return this.#src; }
@@ -152,9 +173,13 @@ export default class Entity {
 
   get isJumping()  { return this.#isJumping;  }
   get isGrounded() { return this.#isGrounded; }
+  get isHurt()     { return this.#isHurt;     }
 
   get exp()     { return this.#exp;     }
   get expNext() { return this.#expNext; }
   get level()   { return this.#level;   }
   get stats()   { return this.#stats;   }
+
+  get invTimer() { return this.#invTimer; }
+  get invDelay() { return this.#invDelay; }
 };

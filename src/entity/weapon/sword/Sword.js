@@ -8,7 +8,7 @@ export default class Sword extends Weapon {
     super(x, y);
 
     this.src.set(16, 8);
-    this.stats.atk = 1;
+    this.stats.atk = 3;
   }
 
   init() {}
@@ -30,10 +30,14 @@ export default class Sword extends Weapon {
 
     EntityHandler.enemies.forEach(e => {
       if (this.dst.intersects(e.dst)) {
+        if (e.invTimer > 0) return;
+
         let damage = owner.stats.atk + this.stats.atk - e.stats.def;
         if (damage <= 0) damage = 1;
 
         e.stats.hp -= damage;
+
+        e.isHurt = true;
 
         if (e.stats.hp <= 0) {
           EntityHandler.remove(e);
