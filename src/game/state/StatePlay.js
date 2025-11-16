@@ -51,7 +51,7 @@ export default class StatePlay extends State {
     }
     // Normal gameplay
     else if (this.#state === 1) {
-      this.#time -= dt*5;
+      this.#time -= dt;
       if (this.#time <= 0) {
         this.#time = 0;
         this.#state = 2;
