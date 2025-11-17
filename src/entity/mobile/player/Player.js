@@ -6,7 +6,7 @@ import Entity from "../../Entity";
 import Sword from "../../weapon/sword/Sword";
 
 export default class Player extends Entity {
-  #weapon;   // Current weapon
+  #weapon; // Current weapon
 
   constructor(x=0, y=0) {
     super(x, y);
@@ -22,6 +22,9 @@ export default class Player extends Entity {
     this.level = 1;
     this.stats.hp    = 50;
     this.stats.maxHp = 50;
+    this.stats.def   =  1;
+    this.stats.luck  =  1;
+    this.stats.spd   =  1;
 
     this.frameDelay = 0.2;
 
@@ -104,4 +107,7 @@ export default class Player extends Entity {
 
     Skin.setLevel(this.level);
   }
+
+  // Accessors
+  get weapon() { return this.#weapon; }
 };

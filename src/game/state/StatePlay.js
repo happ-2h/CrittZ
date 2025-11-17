@@ -1,10 +1,13 @@
 import BossSlime from "../../entity/mobile/enemy/boss/BossSlime";
 import Player from "../../entity/mobile/player/Player";
 import Skin from "../../gfx/ui/Skin";
+import KeyHandler from "../../input/KeyHandler";
 import EntityHandler from "../../utils/EntityHandler";
 import MapHandler from "../../utils/MapHandler";
+import StateHandler from "../../utils/StateHandler";
 import { GAME_WIDTH } from "../constants";
 import State from "./State";
+import StatePause from "./StatePause";
 
 export default class StatePlay extends State {
   #time;       // Keeps track of time, in seconds, until boss
@@ -45,6 +48,10 @@ export default class StatePlay extends State {
   init() {}
 
   update(dt) {
+    // Pause
+    if (KeyHandler.isPressed("ActionB")) StateHandler.push(new StatePause);
+    KeyHandler.update();
+
     // TODO show wave number or player fall from sky
     if (this.#state === 0) {
       this.#state = 1;

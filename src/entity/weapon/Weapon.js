@@ -2,6 +2,7 @@ import Entity from "../Entity";
 
 export default class Weapon extends Entity {
   #level; // Weapon's upgrade level
+
   constructor(x=0, y=0) {
     super(x, y);
 
