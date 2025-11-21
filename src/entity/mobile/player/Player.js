@@ -88,6 +88,23 @@ export default class Player extends Entity {
             console.log("GAME OVER");
         }
       });
+
+      EntityHandler.bullets.forEach(b => {
+        if (b.fromPlayer) return;
+
+        if (this.dst.intersects(b.dst)) {
+          let damage = b.stats.atk - this.stats.def;
+
+          if (damage <= 0) damage = 1;
+
+          this.stats.hp -= damage;
+
+          this.invTimer = this.invDelay;
+
+          if (this.stats.hp <= 0)
+            console.log("GAME OVER");
+        }
+      });
     }
     else this.invTimer -= dt;
 
