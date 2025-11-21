@@ -1,10 +1,12 @@
 import Bat from "../entity/mobile/enemy/bat/Bat";
 import Enemy from "../entity/mobile/enemy/Enemy";
 import Slime from "../entity/mobile/enemy/slime/Slime";
+import Squid from "../entity/mobile/enemy/squid/Squid";
 import Character from "../entity/mobile/npc/Character";
 import Particle from "../entity/mobile/particle/Particle";
 import ParticleSlime from "../entity/mobile/particle/ParticleSlime";
 import Player from "../entity/mobile/player/Player";
+import { GAME_WIDTH } from "../game/constants";
 
 let instance = null;
 
@@ -58,6 +60,18 @@ class _EntityHandler {
     this.add(
       new Bat(
         Math.random() * (112 - 8 + 1) + 8,
+        0
+      )
+    );
+  }
+
+  /**
+   * @brief Adds a bat to the enemies list
+   */
+  addSquid() {
+    this.add(
+      new Squid(
+        Math.random() >= 0.5 ? -8 : GAME_WIDTH,
         0
       )
     );

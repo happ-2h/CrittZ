@@ -73,6 +73,9 @@ export default class StatePlay extends State {
 
         // Bat
         if (Math.random() <= 0.5) EntityHandler.addBat();
+
+        // Squid
+        if (Math.random() <= 0.2) EntityHandler.addSquid();
       }
 
       Skin.setTime(this.#time);

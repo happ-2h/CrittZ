@@ -1,4 +1,4 @@
-import Bat from "../../entity/mobile/enemy/bat/Bat";
+import Squid from "../../entity/mobile/enemy/squid/Squid";
 import Player from "../../entity/mobile/player/Player";
 import EntityHandler from "../../utils/EntityHandler";
 import MapHandler from "../../utils/MapHandler";
@@ -17,7 +17,7 @@ export default class StateTest extends State {
 
   onEnter() {
     EntityHandler.add(new Player(60, 40));
-    EntityHandler.add(new Bat(12, 10));
+    EntityHandler.add(new Squid(10, 10));
   }
   onExit()  {}
 
