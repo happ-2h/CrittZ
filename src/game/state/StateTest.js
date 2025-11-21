@@ -1,4 +1,5 @@
 import Crow from "../../entity/mobile/enemy/crow/Crow";
+import Frog from "../../entity/mobile/enemy/frog/Frog";
 import Player from "../../entity/mobile/player/Player";
 import EntityHandler from "../../utils/EntityHandler";
 import MapHandler from "../../utils/MapHandler";
@@ -17,14 +18,14 @@ export default class StateTest extends State {
 
   onEnter() {
     EntityHandler.add(new Player(60, 40));
-    EntityHandler.add(new Crow(10, 10));
+    EntityHandler.add(new Frog);
   }
   onExit()  {}
 
   init() {}
 
   update(dt) {
-    this.#slimeSpawnTimer += dt;
+    // this.#slimeSpawnTimer += dt;
 
     if (this.#slimeSpawnTimer >= this.#slimeSpawnDelay) {
       this.#slimeSpawnTimer = 0;
@@ -34,6 +35,7 @@ export default class StateTest extends State {
     EntityHandler.updatePlayers(dt);
     EntityHandler.updateEnemies(dt);
     EntityHandler.updateParticles(dt);
+    EntityHandler.updateBullets(dt);
   }
 
   render() {
@@ -42,5 +44,6 @@ export default class StateTest extends State {
     EntityHandler.drawParticles();
     EntityHandler.drawPlayers();
     EntityHandler.drawEnemies();
+    EntityHandler.drawBullets();
   }
 };

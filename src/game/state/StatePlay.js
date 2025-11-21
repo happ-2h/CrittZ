@@ -1,5 +1,6 @@
 import BossSlime from "../../entity/mobile/enemy/boss/BossSlime";
 import Crow from "../../entity/mobile/enemy/crow/Crow";
+import Frog from "../../entity/mobile/enemy/frog/Frog";
 import Player from "../../entity/mobile/player/Player";
 import Skin from "../../gfx/ui/Skin";
 import KeyHandler from "../../input/KeyHandler";
@@ -80,6 +81,9 @@ export default class StatePlay extends State {
 
         // Crow
         if (Math.random() <= 0.3) EntityHandler.add(new Crow);
+
+        // Frog
+        if (Math.random() <= 0.3) EntityHandler.add(new Frog);
       }
 
       Skin.setTime(this.#time);
@@ -113,6 +117,7 @@ export default class StatePlay extends State {
     EntityHandler.updatePlayers(dt);
     EntityHandler.updateEnemies(dt);
     EntityHandler.updateParticles(dt);
+    EntityHandler.updateBullets(dt);
 
     Skin.update(dt);
   }
@@ -123,6 +128,7 @@ export default class StatePlay extends State {
     EntityHandler.drawParticles();
     EntityHandler.drawPlayers();
     EntityHandler.drawEnemies();
+    EntityHandler.drawBullets();
 
     Skin.draw();
   }
