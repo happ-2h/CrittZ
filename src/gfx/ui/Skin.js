@@ -19,9 +19,12 @@ class _Skin {
   #btnPause;
   #btnAction;
 
-  #txtLevel; // Player level number
-  #txtCoins; // Player collected coins
-  #txtTime;  // Remaining wave time
+  #txtLevel;   // Player level number
+  #txtCoins;   // Player collected coins
+  #txtTime;    // Remaining wave time
+
+  #healthBar;  // Health bar graphics
+  #healthFill; // Health bar filling
 
   constructor() {
     if (instance) throw new Error("Skin singleton reconstructed");
@@ -103,6 +106,24 @@ class _Skin {
       new Vec2D(56, 0)
     );
 
+    this.#healthBar = new Icon(
+      new Rectangle(
+        0, 24, 32, 8
+      ),
+      new Rectangle(
+        96, 8, 32, 8
+      )
+    );
+
+    this.#healthFill = new Icon(
+      new Rectangle(
+        32, 24, 8, 8
+      ),
+      new Rectangle(
+        104, 8, 24, 8
+      )
+    );
+
     instance = this;
   }
 
@@ -157,6 +178,9 @@ class _Skin {
     this.#txtLevel.draw();
     this.#txtCoins.draw();
     this.#txtTime.draw();
+
+    this.#healthFill.draw("skins");
+    this.#healthBar.draw("skins");
   }
 
   /**
@@ -176,6 +200,20 @@ class _Skin {
   setTime(time) {
     time |= 0;
     this.#txtTime.text = time.toString().padStart(2, '0');
+  }
+
+  /**
+   * @brief Updates the health bar shown
+   *
+   * @param {Number} hp    - Current HP
+   * @param {Number} maxHp - Maximum HP
+   */
+  setHealth(hp, maxHp) {
+    const percentage = hp / maxHp;
+
+    this.#healthFill.dst.w = 24 * percentage;
+
+    if (this.#healthFill.dst.w <= 0) this.#healthFill.dst.w = 0;
   }
 };
 

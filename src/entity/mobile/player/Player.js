@@ -84,6 +84,8 @@ export default class Player extends Entity {
 
           this.invTimer = this.invDelay;
 
+          Skin.setHealth(this.stats.hp, this.stats.maxHp);
+
           if (this.stats.hp <= 0)
             console.log("GAME OVER");
         }
@@ -100,6 +102,8 @@ export default class Player extends Entity {
           this.stats.hp -= damage;
 
           this.invTimer = this.invDelay;
+
+          Skin.setHealth(this.stats.hp, this.stats.maxHp);
 
           if (this.stats.hp <= 0)
             console.log("GAME OVER");
