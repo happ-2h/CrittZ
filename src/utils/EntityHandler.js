@@ -1,3 +1,4 @@
+import Bullet from "../entity/mobile/bullet/Bullet";
 import Bat from "../entity/mobile/enemy/bat/Bat";
 import Enemy from "../entity/mobile/enemy/Enemy";
 import Slime from "../entity/mobile/enemy/slime/Slime";
@@ -15,6 +16,7 @@ class _EntityHandler {
   #enemies;   // Enemy entities
   #particles; // Particle entities
   #npcs;      // NPC/uncategorized entities
+  #bullets;   // Bullet entities
 
   constructor() {
     if (instance) throw new Error("EntityHandler singleton reconstructed");
@@ -23,6 +25,7 @@ class _EntityHandler {
     this.#enemies   = [];
     this.#particles = [];
     this.#npcs      = [];
+    this.#bullets   = [];
 
     instance = this;
   }
@@ -39,6 +42,7 @@ class _EntityHandler {
     else if (entity instanceof Enemy)     this.#enemies.push(entity);
     else if (entity instanceof Particle)  this.#particles.push(entity);
     else if (entity instanceof Character) this.#npcs.push(entity);
+    else if (entity instanceof Bullet)    this.#bullets.push(entity);
   }
 
   /**
@@ -90,6 +94,8 @@ class _EntityHandler {
       this.#enemies.splice(this.#enemies.indexOf(entity), 1);
     else if (entity instanceof Particle)
       this.#particles.splice(this.#particles.indexOf(entity), 1);
+    else if (entity instanceof Bullet)
+      this.#bullets.splice(this.#bullets.indexOf(entity), 1);
   }
 
   removeEnemies() {
@@ -139,6 +145,15 @@ class _EntityHandler {
     this.#npcs.forEach(n => n.update(dt));
   }
 
+  /**
+   * @brief Updates bullets
+   *
+   * @param {Number} dt - Delta time
+   */
+  updateBullets(dt) {
+    this.#bullets.forEach(b => b.update(dt));
+  }
+
   // Draw entities
   /**
    * @brief Draws players
@@ -168,6 +183,13 @@ class _EntityHandler {
     this.#npcs.forEach(n => n.draw());
   }
 
+  /**
+   * @brief Draws bullets
+   */
+  drawBullets() {
+    this.#bullets.forEach(b => b.draw());
+  }
+
   // Get entity
   /**
    * @brief Get the player at index n
@@ -194,6 +216,7 @@ class _EntityHandler {
   get players()   { return this.#players; }
   get enemies()   { return this.#enemies; }
   get particles() { return this.#particles; }
+  get bullets()   { return this.#bullets; }
 };
 
 const EntityHandler = new _EntityHandler;
