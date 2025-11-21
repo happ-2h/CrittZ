@@ -13,6 +13,18 @@ export default class Vec2D {
   static zero() { return new Vec2D(0, 0); }
 
   /**
+   * @brief Performs subtraction on the provided vectors
+   *
+   * @param {Vec2D} v1 - Vector as minuend
+   * @param {Vec2D} v2 - Vector as subtrahend
+   *
+   * @returns  New vector with the difference of properties
+   */
+  static sub(v1, v2) {
+    return new Vec2D(v1.x - v2.x, v1.y - v2.y);
+  }
+
+  /**
    * @brief Create a vector from the given angle
    *
    * @param {Number} angle - Angle in radians

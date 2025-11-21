@@ -1,4 +1,4 @@
-import Squid from "../../entity/mobile/enemy/squid/Squid";
+import Crow from "../../entity/mobile/enemy/crow/Crow";
 import Player from "../../entity/mobile/player/Player";
 import EntityHandler from "../../utils/EntityHandler";
 import MapHandler from "../../utils/MapHandler";
@@ -17,18 +17,18 @@ export default class StateTest extends State {
 
   onEnter() {
     EntityHandler.add(new Player(60, 40));
-    EntityHandler.add(new Squid(10, 10));
+    EntityHandler.add(new Crow(10, 10));
   }
   onExit()  {}
 
   init() {}
 
   update(dt) {
-    // this.#slimeSpawnTimer += dt;
+    this.#slimeSpawnTimer += dt;
 
     if (this.#slimeSpawnTimer >= this.#slimeSpawnDelay) {
       this.#slimeSpawnTimer = 0;
-      EntityHandler.addSlime();
+      EntityHandler.add(new Crow);
     }
 
     EntityHandler.updatePlayers(dt);

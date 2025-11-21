@@ -1,4 +1,5 @@
 import BossSlime from "../../entity/mobile/enemy/boss/BossSlime";
+import Crow from "../../entity/mobile/enemy/crow/Crow";
 import Player from "../../entity/mobile/player/Player";
 import Skin from "../../gfx/ui/Skin";
 import KeyHandler from "../../input/KeyHandler";
@@ -76,6 +77,9 @@ export default class StatePlay extends State {
 
         // Squid
         if (Math.random() <= 0.2) EntityHandler.addSquid();
+
+        // Crow
+        if (Math.random() <= 0.3) EntityHandler.add(new Crow);
       }
 
       Skin.setTime(this.#time);
