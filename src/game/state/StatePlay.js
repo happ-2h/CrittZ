@@ -68,9 +68,11 @@ export default class StatePlay extends State {
       if (this.#spawnTimer >= this.#spawnDelay) {
         this.#spawnTimer = 0;
 
-        for (let i = 0; i < this.#wave; ++i) {
-          EntityHandler.addSlime();
-        }
+        // Slime
+        for (let i = 0; i < this.#wave; ++i) EntityHandler.addSlime();
+
+        // Bat
+        if (Math.random() <= 0.5) EntityHandler.addBat();
       }
 
       Skin.setTime(this.#time);

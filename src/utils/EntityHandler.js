@@ -1,3 +1,4 @@
+import Bat from "../entity/mobile/enemy/bat/Bat";
 import Enemy from "../entity/mobile/enemy/Enemy";
 import Slime from "../entity/mobile/enemy/slime/Slime";
 import Character from "../entity/mobile/npc/Character";
@@ -46,6 +47,18 @@ class _EntityHandler {
       new Slime(
         Math.random() * (112 - 8 + 1) + 8,
         56
+      )
+    );
+  }
+
+  /**
+   * @brief Adds a bat to the enemies list
+   */
+  addBat() {
+    this.add(
+      new Bat(
+        Math.random() * (112 - 8 + 1) + 8,
+        0
       )
     );
   }
