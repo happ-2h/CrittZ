@@ -1,3 +1,4 @@
+import BossBat from "../../entity/mobile/enemy/boss/BossBat";
 import BossSlime from "../../entity/mobile/enemy/boss/BossSlime";
 import Crow from "../../entity/mobile/enemy/crow/Crow";
 import Frog from "../../entity/mobile/enemy/frog/Frog";
@@ -97,6 +98,8 @@ export default class StatePlay extends State {
 
         if (this.#wave === 1)
           EntityHandler.add(new BossSlime(GAME_WIDTH, 32));
+        else if (this.#wave === 2)
+          EntityHandler.add(new BossBat);
       }
     }
     // Boss fight
