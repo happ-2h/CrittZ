@@ -2,7 +2,7 @@ import BossBat from "../../entity/mobile/enemy/boss/BossBat";
 import BossSlime from "../../entity/mobile/enemy/boss/BossSlime";
 import Crow from "../../entity/mobile/enemy/crow/Crow";
 import Frog from "../../entity/mobile/enemy/frog/Frog";
-import Player from "../../entity/mobile/player/Player";
+import PlayerChicken from "../../entity/mobile/player/PlayerChicken";
 import Skin from "../../gfx/ui/Skin";
 import KeyHandler from "../../input/KeyHandler";
 import EntityHandler from "../../utils/EntityHandler";
@@ -44,7 +44,7 @@ export default class StatePlay extends State {
   }
 
   onEnter() {
-    EntityHandler.add(new Player(60, 40));
+    EntityHandler.add(new PlayerChicken);
   }
   onExit() {}
 

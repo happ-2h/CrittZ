@@ -2,28 +2,28 @@ import Skin from "../../../gfx/ui/Skin";
 import KeyHandler from "../../../input/KeyHandler";
 import { GRAVITY } from "../../../math/constants";
 import EntityHandler from "../../../utils/EntityHandler";
-import Sword from "../../weapon/sword/Sword";
+import SnowballGun from "../../weapon/snowballGun/SnowballGun";
 import Player from "./Player";
 
-export default class PlayerChicken extends Player {
+export default class PlayerPenguin extends Player {
   constructor() {
     super();
 
-    this.src.set(8, 0);
+    this.src.set(40, 0);
 
-    this.weapon = new Sword(this.dst.x+8, this.dst.y);
+    this.weapon = new SnowballGun;
 
-    this.setFrames(1, 3);
+    this.setFrames(5, 7);
   }
 
   update(dt) {
     if (KeyHandler.isDown("right")) {
       this.dir.x =  1;
-      this.setFrames(1, 3);
+      this.setFrames(5, 7);
     }
     else if (KeyHandler.isDown("left")) {
       this.dir.x = -1;
-      this.setFrames(2, 4);
+      this.setFrames(6, 8);
     }
 
     if (KeyHandler.isDown("ActionA")) {
@@ -41,10 +41,8 @@ export default class PlayerChicken extends Player {
     let nextx = this.dst.x + this.vel.x * this.dir.x * dt;
     let nexty = this.dst.y + this.vel.y * dt;
 
-    if (nextx <= 8 + this.weapon.dst.w)
-      nextx = 8 + this.weapon.dst.w;
-    else if (nextx >= 112 - this.weapon.dst.w)
-      nextx = 112 - this.weapon.dst.w;
+    if (nextx <= 8) nextx = 8;
+    else if (nextx >= 112) nextx = 112;
 
     if (nexty >= 40) {
       nexty = 40;
@@ -53,8 +51,7 @@ export default class PlayerChicken extends Player {
       this.isJumping  = false;
     }
 
-    this.dst.x = nextx;
-    this.dst.y = nexty;
+    this.dst.set(nextx, nexty);
 
     if (this.invTimer <= 0) {
       EntityHandler.enemies.forEach(e => {
@@ -97,10 +94,5 @@ export default class PlayerChicken extends Player {
 
     this.weapon.update(this, dt);
     this.animate(dt);
-  }
-
-  draw() {
-    super.draw();
-    this.weapon.draw();
   }
 };

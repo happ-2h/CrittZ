@@ -4,8 +4,8 @@ import Entity from "../../Entity";
 export default class Player extends Entity {
   #weapon; // Current weapon
 
-  constructor(x=0, y=0) {
-    super(x, y);
+  constructor() {
+    super(60, 40);
 
     this.dir.set(1, 0);
     this.vel.set(40, 0);
@@ -22,11 +22,6 @@ export default class Player extends Entity {
   }
 
   init() {}
-
-  draw() {
-    super.draw();
-    this.#weapon.draw();
-  }
 
   levelUp() {
     this.expNext = 10 + 5 * this.level * (this.level - 1);
