@@ -1,6 +1,6 @@
 import BossBat from "../../entity/mobile/enemy/boss/BossBat";
 import Crow from "../../entity/mobile/enemy/crow/Crow";
-import PlayerPenguin from "../../entity/mobile/player/PlayerPenguin";
+import PlayerGoose from "../../entity/mobile/player/PlayerGoose";
 import Skin from "../../gfx/ui/Skin";
 import EntityHandler from "../../utils/EntityHandler";
 import MapHandler from "../../utils/MapHandler";
@@ -18,7 +18,7 @@ export default class StateTest extends State {
   }
 
   onEnter() {
-    EntityHandler.add(new PlayerPenguin);
+    EntityHandler.add(new PlayerGoose);
     EntityHandler.add(new BossBat);
   }
   onExit()  {}
