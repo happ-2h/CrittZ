@@ -1,6 +1,6 @@
-import BossCat from "../../entity/mobile/enemy/boss/BossCat";
 import Crow from "../../entity/mobile/enemy/crow/Crow";
-import PlayerChicken from "../../entity/mobile/player/PlayerChicken";
+import PlayerPenguin from "../../entity/mobile/player/PlayerPenguin";
+import PickupJewel from "../../entity/pickup/PickupJewel";
 import Skin from "../../gfx/ui/Skin";
 import EntityHandler from "../../utils/EntityHandler";
 import MapHandler from "../../utils/MapHandler";
@@ -18,8 +18,8 @@ export default class StateTest extends State {
   }
 
   onEnter() {
-    EntityHandler.add(new PlayerChicken);
-    EntityHandler.add(new BossCat);
+    EntityHandler.add(new PlayerPenguin);
+    EntityHandler.add(new PickupJewel(30, 40, 2));
   }
   onExit()  {}
 
@@ -37,6 +37,7 @@ export default class StateTest extends State {
     EntityHandler.updateEnemies(dt);
     EntityHandler.updateParticles(dt);
     EntityHandler.updateBullets(dt);
+    EntityHandler.updatePickups(dt);
   }
 
   render() {
@@ -46,6 +47,7 @@ export default class StateTest extends State {
     EntityHandler.drawPlayers();
     EntityHandler.drawEnemies();
     EntityHandler.drawBullets();
+    EntityHandler.drawPickups();
 
     Skin.draw();
   }

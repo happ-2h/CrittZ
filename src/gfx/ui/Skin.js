@@ -215,6 +215,17 @@ class _Skin {
 
     if (this.#healthFill.dst.w <= 0) this.#healthFill.dst.w = 0;
   }
+
+  /**
+   * @brief Updates the money amount text
+   *
+   * @param {Number} money - Money amount
+   */
+  setMoney(money) {
+    money |= 0;
+    if (money > 999) money = 999;
+    this.#txtCoins.text = money.toString().padStart(3, '0');
+  }
 };
 
 const Skin = new _Skin;

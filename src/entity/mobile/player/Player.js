@@ -3,6 +3,7 @@ import Entity from "../../Entity";
 
 export default class Player extends Entity {
   #weapon; // Current weapon
+  #money;  // Total of collected money
 
   constructor() {
     super(60, 40);
@@ -19,6 +20,8 @@ export default class Player extends Entity {
     this.stats.spd   =  1;
 
     this.frameDelay = 0.2;
+
+    this.#money = 0;
   }
 
   init() {}
@@ -33,6 +36,9 @@ export default class Player extends Entity {
 
   // Mutators
   set weapon(w) { this.#weapon = w; }
+  set money(m)  { this.#money  = m; }
+
   // Accessors
   get weapon() { return this.#weapon; }
+  get money()  { return this.#money;  }
 };

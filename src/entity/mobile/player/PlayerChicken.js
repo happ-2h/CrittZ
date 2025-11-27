@@ -95,6 +95,16 @@ export default class PlayerChicken extends Player {
     }
     else this.invTimer -= dt;
 
+    EntityHandler.pickups.forEach(p => {
+      if (this.dst.intersects(p.dst)) {
+
+        this.money += p.value;
+        Skin.setMoney(this.money);
+
+        EntityHandler.remove(p);
+      }
+    });
+
     this.weapon.update(this, dt);
     this.animate(dt);
   }

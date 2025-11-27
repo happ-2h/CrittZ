@@ -124,6 +124,7 @@ export default class StatePlay extends State {
     EntityHandler.updateEnemies(dt);
     EntityHandler.updateParticles(dt);
     EntityHandler.updateBullets(dt);
+    EntityHandler.updatePickups(dt);
 
     Skin.update(dt);
   }
@@ -135,6 +136,7 @@ export default class StatePlay extends State {
     EntityHandler.drawPlayers();
     EntityHandler.drawEnemies();
     EntityHandler.drawBullets();
+    EntityHandler.drawPickups();
 
     Skin.draw();
   }

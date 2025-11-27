@@ -7,6 +7,7 @@ import Character from "../entity/mobile/npc/Character";
 import Particle from "../entity/mobile/particle/Particle";
 import ParticleSlime from "../entity/mobile/particle/ParticleSlime";
 import Player from "../entity/mobile/player/Player";
+import Pickup from "../entity/pickup/Pickup";
 import { GAME_WIDTH } from "../game/constants";
 
 let instance = null;
@@ -17,6 +18,7 @@ class _EntityHandler {
   #particles; // Particle entities
   #npcs;      // NPC/uncategorized entities
   #bullets;   // Bullet entities
+  #pickups;   // Pickup entities
 
   constructor() {
     if (instance) throw new Error("EntityHandler singleton reconstructed");
@@ -26,6 +28,7 @@ class _EntityHandler {
     this.#particles = [];
     this.#npcs      = [];
     this.#bullets   = [];
+    this.#pickups   = [];
 
     instance = this;
   }
@@ -43,6 +46,7 @@ class _EntityHandler {
     else if (entity instanceof Particle)  this.#particles.push(entity);
     else if (entity instanceof Character) this.#npcs.push(entity);
     else if (entity instanceof Bullet)    this.#bullets.push(entity);
+    else if (entity instanceof Pickup)    this.#pickups.push(entity);
   }
 
   /**
@@ -96,6 +100,8 @@ class _EntityHandler {
       this.#particles.splice(this.#particles.indexOf(entity), 1);
     else if (entity instanceof Bullet)
       this.#bullets.splice(this.#bullets.indexOf(entity), 1);
+    else if (entity instanceof Pickup)
+      this.#pickups.splice(this.#pickups.indexOf(entity), 1);
   }
 
   removeEnemies() {
@@ -154,6 +160,15 @@ class _EntityHandler {
     this.#bullets.forEach(b => b.update(dt));
   }
 
+  /**
+   * @brief Updates pickups
+   *
+   * @param {Number} dt - Delta time
+   */
+  updatePickups(dt) {
+    this.#pickups.forEach(p => p.update(dt));
+  }
+
   // Draw entities
   /**
    * @brief Draws players
@@ -190,6 +205,13 @@ class _EntityHandler {
     this.#bullets.forEach(b => b.draw());
   }
 
+  /**
+   * @brief Draws pickups
+   */
+  drawPickups() {
+    this.#pickups.forEach(p => p.draw());
+  }
+
   // Get entity
   /**
    * @brief Get the player at index n
@@ -217,6 +239,7 @@ class _EntityHandler {
   get enemies()   { return this.#enemies; }
   get particles() { return this.#particles; }
   get bullets()   { return this.#bullets; }
+  get pickups()   { return this.#pickups; }
 };
 
 const EntityHandler = new _EntityHandler;
