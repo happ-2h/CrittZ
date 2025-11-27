@@ -36,6 +36,16 @@ export default class Vec2D {
   }
 
   /**
+   * @brief Scales a vector by the given n scalar
+   *
+   * @param {Number} n - Scalar value
+   */
+  scale(n=1) {
+    this.#x *= n;
+    this.#y *= n;
+  }
+
+  /**
    * @brief Normalizes the vector
    */
   normalize() {
