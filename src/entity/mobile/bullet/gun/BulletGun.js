@@ -30,6 +30,8 @@ export default class BulletGun extends Bullet {
 
     EntityHandler.enemies.forEach(e => {
       if (this.dst.intersects(e.dst)) {
+        EntityHandler.remove(this);
+
         if (e.invTimer > 0) return;
 
         let damage = this.#owner.stats.atk + this.stats.atk - e.stats.def;
