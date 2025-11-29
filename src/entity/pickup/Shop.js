@@ -5,6 +5,7 @@ import Pickup from "./Pickup";
 export default class Shop extends Pickup {
   #state; // State of the shop
   #life;  // Lifetime of the shop
+  #value; // Dummy
 
   constructor() {
     super();
@@ -21,6 +22,8 @@ export default class Shop extends Pickup {
 
     this.dir.set(0, 1);
     this.vel.set(0, 30);
+
+    this.#value = 0;
   }
 
   init() {}
@@ -46,4 +49,7 @@ export default class Shop extends Pickup {
       if (this.#life <= 0) EntityHandler.remove(this);
     }
   }
+
+  // Accessors
+  get value() { return this.#value; }
 };

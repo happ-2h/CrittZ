@@ -1,5 +1,6 @@
 import EntityHandler from "../../../utils/EntityHandler";
 import Snowball from "../../mobile/bullet/snowball/Snowball";
+import SnowballStraight from "../../mobile/bullet/snowball/SnowballStraight";
 import Weapon from "../Weapon";
 
 export default class SnowballGun extends Weapon {
@@ -24,6 +25,9 @@ export default class SnowballGun extends Weapon {
       this.#fireTimer = 0;
 
       EntityHandler.add(new Snowball(owner.dst.x, owner.dst.y, owner.dir.x, owner));
+
+      if (this.level === 2)
+        EntityHandler.add(new SnowballStraight(owner.dst.x, owner.dst.y, owner.dir.x, owner));
     }
   }
 

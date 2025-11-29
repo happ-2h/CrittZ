@@ -31,6 +31,17 @@ export default class Gun extends Weapon {
           owner
         )
       );
+
+      if (this.level === 2) {
+        EntityHandler.add(
+          new BulletGun(
+            owner.dir.x === 1 ? owner.dst.x+4 : owner.dst.x,
+            owner.dst.y + 2,
+            -owner.dir.x,
+            owner
+          )
+        );
+      }
     }
   }
 

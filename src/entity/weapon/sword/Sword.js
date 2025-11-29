@@ -22,11 +22,20 @@ export default class Sword extends Weapon {
   update(owner, dt) {
     if (this.level === 1) {
       this.src.x = owner.dir.x === -1 ? 16 : 8;
+      this.dst.set(
+        owner.dst.x + owner.dst.w * owner.dir.x,
+        owner.dst.y
+      );
     }
-    this.dst.set(
-      owner.dst.x + owner.dst.w * owner.dir.x,
-      owner.dst.y
-    );
+    else {
+      this.src.y = 176;
+      this.src.x = owner.dir.x === -1 ? 16 : 0;
+      this.src.dim.set(16, 8);
+      this.dst.set(
+        owner.dir.x === 1 ? owner.dst.x + 8 : owner.dst.x - 16,
+        owner.dst.y, 16, 8
+      );
+    }
 
     EntityHandler.enemies.forEach(e => {
       if (this.dst.intersects(e.dst)) {

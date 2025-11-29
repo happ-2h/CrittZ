@@ -1,4 +1,5 @@
 import Icon from "../../gfx/ui/Icon";
+import Skin from "../../gfx/ui/Skin";
 import Text from "../../gfx/ui/Text";
 import KeyHandler from "../../input/KeyHandler";
 import Rectangle from "../../math/shapes/Rectangle";
@@ -10,6 +11,7 @@ import State from "./State";
 export default class StateShop extends State {
   #playerType;    // Chicken, goose, or penguin
   #selection;     // User selection
+  #playerRef;     // Reference to the player
 
   #sinTimer;      // Sine wave timer
 
@@ -29,6 +31,7 @@ export default class StateShop extends State {
   #txt_sword;
   #txt_gun;
   #txt_snowball;
+  #txt_soldOut;
 
   #txt_health;
   #txt_speed;
@@ -45,6 +48,7 @@ export default class StateShop extends State {
     this.#playerType = player;
     this.#selection  = 0;
     this.#sinTimer   = 0;
+    this.#playerRef  = EntityHandler.getPlayer(0);
 
     this.#icon_sword = new Icon(
       new Rectangle(0, 176, 16, 8),
@@ -81,11 +85,13 @@ export default class StateShop extends State {
     this.#txt_speed    = new Text("speed  +1", new Vec2D(28, 40));
     this.#txt_exit     = new Text("exit", new Vec2D(28, 56));
 
-    this.#txt_cost = new Text("000", new Vec2D(104, 56), 0);
-    this.#txt_player = new Text(
+    this.#txt_cost     = new Text("000", new Vec2D(104, 56), 0);
+    this.#txt_player   = new Text(
       EntityHandler.getPlayer(0).money.toString().padStart(3, '0'),
       new Vec2D(104, 64), 0
     );
+
+    this.#txt_soldOut  = new Text("sold out", new Vec2D(28, 8));
   }
 
   onEnter() {}
@@ -102,9 +108,50 @@ export default class StateShop extends State {
     }
     else if (KeyHandler.isPressed("ActionA")) {
       switch(this.#selection) {
-        case 0: break;
-        case 1: break;
-        case 2: break;
+        // Weapon upgrade
+        case 0:
+          if (
+            this.#playerRef.money >= 100 &&
+            this.#playerRef.weapon.level === 1
+          ) {
+            this.#playerRef.weapon.level = 2;
+            this.#playerRef.money -= 100;
+            this.#txt_player.text = this.#playerRef.money.toString().padStart(3, '0');
+          }
+          break;
+        // Health
+        case 1:
+          if (
+            this.#playerRef.money >= 20 &&
+            this.#playerRef.stats.hp < this.#playerRef.stats.maxHp
+          ) {
+            this.#playerRef.stats.hp =
+              this.#playerRef.stats.hp + 5 > this.#playerRef.stats.maxHp ?
+                this.#playerRef.stats.maxHp :
+                this.#playerRef.stats.hp + 5;
+            Skin.setHealth(this.#playerRef.stats.hp, this.#playerRef.stats.maxHp);
+            this.#playerRef.money -= 20;
+            this.#txt_player.text = this.#playerRef.money.toString().padStart(3, '0');
+          }
+          break;
+        // Speed
+        case 2:
+          // Upgrade cap
+          if (
+            this.#playerRef.vel.x >= 80 &&
+            this.#playerRef.weapon.fireRate <= 0.1
+          ) break;
+
+          if (this.#playerRef.money >= 50) {
+            if (this.#playerRef.vel.x < 80)
+              ++this.#playerRef.vel.x;
+            if (this.#playerRef.weapon.fireRate > 0.1)
+              this.#playerRef.weapon.fireRate -= 0.01;
+            this.#playerRef.money -= 50;
+            this.#txt_player.text = this.#playerRef.money.toString().padStart(3, '0');
+          }
+          break;
+        // Exit
         default:
           StateHandler.pop();
           break;
@@ -165,7 +212,9 @@ export default class StateShop extends State {
   }
 
   render() {
-    if (this.#playerType === "chicken") {
+    if (this.#playerRef.weapon.level > 1)
+      this.#txt_soldOut.draw();
+    else if (this.#playerType === "chicken") {
       this.#icon_sword.draw();
       this.#txt_sword.draw();
     }

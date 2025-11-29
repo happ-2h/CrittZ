@@ -1,5 +1,5 @@
 import Crow from "../../entity/mobile/enemy/crow/Crow";
-import PlayerPenguin from "../../entity/mobile/player/PlayerPenguin";
+import PlayerChicken from "../../entity/mobile/player/PlayerChicken";
 import Shop from "../../entity/pickup/Shop";
 import Skin from "../../gfx/ui/Skin";
 import EntityHandler from "../../utils/EntityHandler";
@@ -18,7 +18,7 @@ export default class StateTest extends State {
   }
 
   onEnter() {
-    EntityHandler.add(new PlayerPenguin);
+    EntityHandler.add(new PlayerChicken);
     EntityHandler.add(new Shop);
   }
   onExit()  {}
