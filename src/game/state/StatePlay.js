@@ -1,9 +1,11 @@
+import Entity from "../../entity/Entity";
 import BossBat from "../../entity/mobile/enemy/boss/BossBat";
 import BossCat from "../../entity/mobile/enemy/boss/BossCat";
 import BossSlime from "../../entity/mobile/enemy/boss/BossSlime";
 import Crow from "../../entity/mobile/enemy/crow/Crow";
 import Frog from "../../entity/mobile/enemy/frog/Frog";
 import PlayerChicken from "../../entity/mobile/player/PlayerChicken";
+import Shop from "../../entity/pickup/Shop";
 import Skin from "../../gfx/ui/Skin";
 import KeyHandler from "../../input/KeyHandler";
 import EntityHandler from "../../utils/EntityHandler";
@@ -14,14 +16,15 @@ import State from "./State";
 import StatePause from "./StatePause";
 
 export default class StatePlay extends State {
-  #time;       // Keeps track of time, in seconds, until boss
-  #wave;       // Current wave
-  #state;      // State of the current wave
+  #time;        // Keeps track of time, in seconds, until boss
+  #wave;        // Current wave
+  #state;       // State of the current wave
 
-  #spawnDelay; // Spawn delay based on wave
-  #spawnTimer; // Spawn timer
+  #spawnDelay;  // Spawn delay based on wave
+  #spawnTimer;  // Spawn timer
+  #shopSpawned; // Was the shop spawned already
 
-  #currentMap; // Background map graphics
+  #currentMap;  // Background map graphics
 
   // End stats
   #nKilledEnemies;
@@ -35,8 +38,9 @@ export default class StatePlay extends State {
     this.#state =  0;
 
     // this.#spawnDelay = 3 - (3*(this.#wave/10));
-    this.#spawnDelay = 2;
-    this.#spawnTimer = 0;
+    this.#spawnDelay  = 2;
+    this.#spawnTimer  = 0;
+    this.#shopSpawned = false;
 
     this.#currentMap = "testMap";
 
@@ -88,6 +92,12 @@ export default class StatePlay extends State {
         if (Math.random() <= 0.3) EntityHandler.add(new Frog);
       }
 
+      // Spawn shop
+      if (!this.#shopSpawned && (this.#time|0) === 30) {
+        this.#shopSpawned = true;
+        EntityHandler.add(new Shop);
+      }
+
       Skin.setTime(this.#time);
     }
     // Clean up
@@ -117,6 +127,8 @@ export default class StatePlay extends State {
         this.#spawnDelay -= 0.1;
 
         if (this.#spawnDelay < 0.1) this.#spawnDelay = 0.1;
+
+        this.#shopSpawned = false;
       }
     }
 

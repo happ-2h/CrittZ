@@ -1,7 +1,10 @@
+import StateShop from "../../../game/state/StateShop";
 import Skin from "../../../gfx/ui/Skin";
 import KeyHandler from "../../../input/KeyHandler";
 import { GRAVITY } from "../../../math/constants";
 import EntityHandler from "../../../utils/EntityHandler";
+import StateHandler from "../../../utils/StateHandler";
+import Shop from "../../pickup/Shop";
 import Sword from "../../weapon/sword/Sword";
 import Player from "./Player";
 
@@ -97,6 +100,8 @@ export default class PlayerChicken extends Player {
 
     EntityHandler.pickups.forEach(p => {
       if (this.dst.intersects(p.dst)) {
+        if (p instanceof Shop)
+          StateHandler.push(new StateShop("chicken"));
 
         this.money += p.value;
         Skin.setMoney(this.money);

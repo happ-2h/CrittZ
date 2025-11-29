@@ -1,6 +1,6 @@
 import Crow from "../../entity/mobile/enemy/crow/Crow";
 import PlayerPenguin from "../../entity/mobile/player/PlayerPenguin";
-import PickupJewel from "../../entity/pickup/PickupJewel";
+import Shop from "../../entity/pickup/Shop";
 import Skin from "../../gfx/ui/Skin";
 import EntityHandler from "../../utils/EntityHandler";
 import MapHandler from "../../utils/MapHandler";
@@ -19,7 +19,7 @@ export default class StateTest extends State {
 
   onEnter() {
     EntityHandler.add(new PlayerPenguin);
-    EntityHandler.add(new PickupJewel(30, 40, 2));
+    EntityHandler.add(new Shop);
   }
   onExit()  {}
 

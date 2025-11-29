@@ -85,6 +85,19 @@ export default class Text {
           ));
         }
       }
+      // Special
+      else {
+        if (c === '+') {
+          this.#imgs.push(new Icon(
+            new Rectangle(80, 248, 8, 8),
+            new Rectangle(
+              this.#pos.x + (n<<3),
+              this.#pos.y,
+              8, 8
+            )
+          ));
+        }
+      }
     });
   }
 
