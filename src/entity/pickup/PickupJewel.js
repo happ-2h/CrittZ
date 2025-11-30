@@ -37,7 +37,7 @@ export default class PickupJewel extends Pickup {
       case 2:
         this.src.set(32, 160);
         this.setFrames(644, 645)
-        this.#value = 3;
+        this.#value = 7;
         break;
     }
   }

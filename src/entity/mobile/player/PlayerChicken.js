@@ -44,10 +44,10 @@ export default class PlayerChicken extends Player {
     let nextx = this.dst.x + this.vel.x * this.dir.x * dt;
     let nexty = this.dst.y + this.vel.y * dt;
 
-    if (nextx <= 8 + this.weapon.dst.w)
-      nextx = 8 + this.weapon.dst.w;
-    else if (nextx >= 112 - this.weapon.dst.w)
-      nextx = 112 - this.weapon.dst.w;
+    if (nextx <= 8 + 8)
+      nextx = 8 + 8;
+    else if (nextx >= 112 - 8)
+      nextx = 112 - 8;
 
     if (nexty >= 40) {
       nexty = 40;

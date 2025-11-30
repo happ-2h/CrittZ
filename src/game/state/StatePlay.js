@@ -1,4 +1,3 @@
-import Entity from "../../entity/Entity";
 import BossBat from "../../entity/mobile/enemy/boss/BossBat";
 import BossCat from "../../entity/mobile/enemy/boss/BossCat";
 import BossSlime from "../../entity/mobile/enemy/boss/BossSlime";

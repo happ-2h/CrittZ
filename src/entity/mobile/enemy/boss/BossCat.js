@@ -62,8 +62,6 @@ export default class BossCat extends Enemy {
 
         const healthPercent = this.stats.hp / this.stats.maxHp;
 
-        console.log(healthPercent);
-
         if (healthPercent >= 0.80) {
           EntityHandler.add(
           new Paw(

@@ -1,6 +1,15 @@
 import { GAME_WIDTH } from "../../../../game/constants";
 import { GRAVITY } from "../../../../math/constants";
 import EntityHandler from "../../../../utils/EntityHandler";
+import PickupJewel from "../../../pickup/PickupJewel";
+import Bat from "../../enemy/bat/Bat";
+import BossBat from "../../enemy/boss/BossBat";
+import BossCat from "../../enemy/boss/BossCat";
+import BossSlime from "../../enemy/boss/BossSlime";
+import Crow from "../../enemy/crow/Crow";
+import Frog from "../../enemy/frog/Frog";
+import Slime from "../../enemy/slime/Slime";
+import Squid from "../../enemy/squid/Squid";
 import ParticleSlime from "../../particle/ParticleSlime";
 import Bullet from "../Bullet";
 
@@ -52,6 +61,40 @@ export default class Snowball extends Bullet {
           EntityHandler.add(new ParticleSlime(e.dst.x, e.dst.y, 4.1887));
           EntityHandler.add(new ParticleSlime(e.dst.x, e.dst.y, 5.2359));
           EntityHandler.add(new ParticleSlime(e.dst.x, e.dst.y, 4.7123));
+
+          // Spawn jewels
+          if (
+            (e instanceof Slime || e instanceof Bat) &&
+            Math.random() >= 0.3
+          ) {
+            EntityHandler.add(new PickupJewel(e.dst.x, e.dst.y, 0));
+          }
+          else if (e instanceof Crow && Math.random() >= 0.4) {
+            EntityHandler.add(new PickupJewel(e.dst.x, e.dst.y, 0));
+            EntityHandler.add(new PickupJewel(e.dst.x, e.dst.y, 0));
+          }
+          else if (e instanceof Frog && Math.random() >= 0.4) {
+            EntityHandler.add(new PickupJewel(e.dst.x, e.dst.y, 0));
+            EntityHandler.add(new PickupJewel(e.dst.x, e.dst.y, 1));
+          }
+          else if (e instanceof Squid && Math.random() >= 0.5) {
+            EntityHandler.add(new PickupJewel(e.dst.x, e.dst.y, 0));
+            EntityHandler.add(new PickupJewel(e.dst.x, e.dst.y, 1));
+            EntityHandler.add(new PickupJewel(e.dst.x, e.dst.y, 0));
+          }
+          // Boss
+          else if (
+            e instanceof BossBat ||
+            e instanceof BossCat ||
+            e instanceof BossSlime
+          ) {
+            EntityHandler.add(new PickupJewel(e.dst.x, e.dst.y, 0));
+            EntityHandler.add(new PickupJewel(e.dst.x, e.dst.y, 1));
+            EntityHandler.add(new PickupJewel(e.dst.x, e.dst.y, 0));
+            EntityHandler.add(new PickupJewel(e.dst.x, e.dst.y, 2));
+            EntityHandler.add(new PickupJewel(e.dst.x, e.dst.y, 2));
+            EntityHandler.add(new PickupJewel(e.dst.x, e.dst.y, 1));
+          }
 
           this.#owner.exp += e.exp;
           if (this.#owner.exp >= this.#owner.expNext) this.#owner.levelUp();
