@@ -10,6 +10,7 @@ import EntityHandler from "../../utils/EntityHandler";
 import StateHandler from "../../utils/StateHandler";
 import { SCREEN_HEIGHT, SCREEN_WIDTH } from "../constants";
 import State from "./State";
+import StateMainShop from "./StateMainShop";
 import StatePlay from "./StatePlay";
 
 export default class StateTitleScreen extends State {
@@ -88,7 +89,10 @@ export default class StateTitleScreen extends State {
     else if (KeyHandler.isPressed("right"))
       this.#selection = this.#selection === 2 ? 0 : this.#selection + 1;
     else if (KeyHandler.isPressed("ActionA")) {
-      if (this.#selection === 0) {}
+      if (this.#selection === 0) {
+        StateHandler.pop();
+        StateHandler.push(new StateMainShop);
+      }
       else if (this.#selection === 1) {
         StateHandler.pop();
         StateHandler.push(new StatePlay);

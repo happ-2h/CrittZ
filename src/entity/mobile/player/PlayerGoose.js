@@ -18,6 +18,8 @@ export default class PlayerGoose extends Player {
 
     this.weapon = new Gun;
 
+    this.price = 100;
+
     this.setFrames(9, 11);
   }
 
