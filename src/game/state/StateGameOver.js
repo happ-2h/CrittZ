@@ -62,6 +62,8 @@ export default class StateGameOver extends State {
       StateHandler.pop();
       StateHandler.push(new StateTitleScreen);
     }
+
+    KeyHandler.update()
   }
 
   render() {

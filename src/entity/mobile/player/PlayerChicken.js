@@ -19,6 +19,8 @@ export default class PlayerChicken extends Player {
 
     this.weapon = new Sword(this.dst.x+8, this.dst.y);
 
+    this.price = 0;
+
     this.setFrames(1, 3);
   }
 

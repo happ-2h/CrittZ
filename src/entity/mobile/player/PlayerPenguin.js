@@ -18,6 +18,8 @@ export default class PlayerPenguin extends Player {
 
     this.weapon = new SnowballGun;
 
+    this.price = 40;
+
     this.setFrames(5, 7);
   }
 

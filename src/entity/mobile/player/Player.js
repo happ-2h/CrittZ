@@ -4,6 +4,7 @@ import Entity from "../../Entity";
 export default class Player extends Entity {
   #weapon; // Current weapon
   #money;  // Total of collected money
+  #price;  // Price of player (for main menu shop)
 
   // Game stats
   #enemiesKilled;
@@ -26,6 +27,7 @@ export default class Player extends Entity {
     this.frameDelay = 0.2;
 
     this.#money = 0;
+    this.#price = 999;
 
     this.#enemiesKilled = 0;
     this.#bossesKilled  = 0;
@@ -44,12 +46,14 @@ export default class Player extends Entity {
   // Mutators
   set weapon(w) { this.#weapon = w; }
   set money(m)  { this.#money  = m; }
+  set price(p)  { this.#price  = p; }
   set enemiesKilled(e) { this.#enemiesKilled = e; }
   set bossesKilled(b)  { this.#bossesKilled  = b; }
 
   // Accessors
   get weapon() { return this.#weapon; }
   get money()  { return this.#money;  }
+  get price()  { return this.#price;  }
   get enemiesKilled() { return this.#enemiesKilled; }
   get bossesKilled()  { return this.#bossesKilled;  }
 };
