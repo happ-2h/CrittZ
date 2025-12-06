@@ -93,6 +93,24 @@ export default class BulletGun extends Bullet {
 
           this.#owner.exp += e.exp;
           if (this.#owner.exp >= this.#owner.expNext) this.#owner.levelUp();
+
+          // Stats
+          if (
+            e instanceof Slime ||
+            e instanceof Bat   ||
+            e instanceof Crow  ||
+            e instanceof Frog  ||
+            e instanceof Squid
+          ) {
+            ++EntityHandler.getPlayer(0).enemiesKilled;
+          }
+          else if (
+            e instanceof BossBat   ||
+            e instanceof BossCat   ||
+            e instanceof BossSlime
+          ) {
+            ++EntityHandler.getPlayer(0).bossesKilled;
+          }
         }
       }
     });

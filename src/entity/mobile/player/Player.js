@@ -5,6 +5,10 @@ export default class Player extends Entity {
   #weapon; // Current weapon
   #money;  // Total of collected money
 
+  // Game stats
+  #enemiesKilled;
+  #bossesKilled;
+
   constructor() {
     super(60, 40);
 
@@ -22,6 +26,9 @@ export default class Player extends Entity {
     this.frameDelay = 0.2;
 
     this.#money = 0;
+
+    this.#enemiesKilled = 0;
+    this.#bossesKilled  = 0;
   }
 
   init() {}
@@ -37,8 +44,12 @@ export default class Player extends Entity {
   // Mutators
   set weapon(w) { this.#weapon = w; }
   set money(m)  { this.#money  = m; }
+  set enemiesKilled(e) { this.#enemiesKilled = e; }
+  set bossesKilled(b)  { this.#bossesKilled  = b; }
 
   // Accessors
   get weapon() { return this.#weapon; }
   get money()  { return this.#money;  }
+  get enemiesKilled() { return this.#enemiesKilled; }
+  get bossesKilled()  { return this.#bossesKilled;  }
 };

@@ -97,6 +97,16 @@ export default class Text {
             )
           ));
         }
+        else if (c === '%') {
+          this.#imgs.push(new Icon(
+            new Rectangle(104, 232, 4, 4),
+            new Rectangle(
+              this.#pos.x + (n<<2),
+              this.#pos.y,
+              4, 4
+            )
+          ));
+        }
       }
     });
   }

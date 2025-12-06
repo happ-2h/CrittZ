@@ -114,6 +114,18 @@ class _EntityHandler {
     });
   }
 
+  /**
+   * @brief Removes all entities from all containers
+   */
+  flush() {
+    this.#players.length   = 0;
+    this.#enemies.length   = 0;
+    this.#particles.length = 0;
+    this.#npcs.length      = 0;
+    this.#bullets.length   = 0;
+    this.#pickups.length   = 0;
+  }
+
   // Update entities
   /**
    * @brief Updates players

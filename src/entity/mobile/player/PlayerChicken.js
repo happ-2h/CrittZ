@@ -1,3 +1,4 @@
+import StateGameOver from "../../../game/state/StateGameOver";
 import StateShop from "../../../game/state/StateShop";
 import Skin from "../../../gfx/ui/Skin";
 import KeyHandler from "../../../input/KeyHandler";
@@ -13,6 +14,8 @@ export default class PlayerChicken extends Player {
     super();
 
     this.src.set(8, 0);
+
+    this.stats.luck = 0.2;
 
     this.weapon = new Sword(this.dst.x+8, this.dst.y);
 
@@ -72,8 +75,10 @@ export default class PlayerChicken extends Player {
 
           Skin.setHealth(this.stats.hp, this.stats.maxHp);
 
-          if (this.stats.hp <= 0)
-            console.log("GAME OVER");
+          if (this.stats.hp <= 0) {
+            StateHandler.pop();
+            StateHandler.push(new StateGameOver);
+          }
         }
       });
 
@@ -91,8 +96,10 @@ export default class PlayerChicken extends Player {
 
           Skin.setHealth(this.stats.hp, this.stats.maxHp);
 
-          if (this.stats.hp <= 0)
-            console.log("GAME OVER");
+          if (this.stats.hp <= 0) {
+            StateHandler.pop();
+            StateHandler.push(new StateGameOver);
+          }
         }
       });
     }

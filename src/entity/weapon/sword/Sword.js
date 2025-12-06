@@ -100,6 +100,24 @@ export default class Sword extends Weapon {
 
           owner.exp += e.exp;
           if (owner.exp >= owner.expNext) owner.levelUp();
+
+          // Stats
+          if (
+            e instanceof Slime ||
+            e instanceof Bat   ||
+            e instanceof Crow  ||
+            e instanceof Frog  ||
+            e instanceof Squid
+          ) {
+            ++EntityHandler.getPlayer(0).enemiesKilled;
+          }
+          else if (
+            e instanceof BossBat   ||
+            e instanceof BossCat   ||
+            e instanceof BossSlime
+          ) {
+            ++EntityHandler.getPlayer(0).bossesKilled;
+          }
         }
       }
     });

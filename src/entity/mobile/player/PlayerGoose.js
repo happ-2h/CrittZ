@@ -14,6 +14,8 @@ export default class PlayerGoose extends Player {
 
     this.src.set(72, 0);
 
+    this.stats.luck = 0.3;
+
     this.weapon = new Gun;
 
     this.setFrames(9, 11);

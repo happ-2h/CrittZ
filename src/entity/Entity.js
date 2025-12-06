@@ -96,7 +96,6 @@ export default class Entity {
     this.#stats.maxHp += 1 * (Math.floor(this.#level / 2));
     this.#stats.atk   += this.#stats.rate;
     this.#stats.def   += this.#stats.rate;
-    this.#stats.luck  += this.#stats.rate;
     this.#stats.spd   += this.#stats.rate;
 
     if (this.#stats.atk  >= this.#stats.cap) this.#stats.atk  = this.#stats.cap;

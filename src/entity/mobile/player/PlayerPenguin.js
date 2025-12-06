@@ -14,6 +14,8 @@ export default class PlayerPenguin extends Player {
 
     this.src.set(40, 0);
 
+    this.stats.luck = 0.5;
+
     this.weapon = new SnowballGun;
 
     this.setFrames(5, 7);
