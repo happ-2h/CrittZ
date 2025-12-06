@@ -27,4 +27,4 @@
 1. Run `yarn dev` to start the development server.
 1. You should get a link (default: `http://localhost:5173`) you can connect to to start playing locally.
 
-<p align="right">(<a>Back to top</a>)</p>
+<p align="right">(<a href="#readme-top">Back to top</a>)</p>
