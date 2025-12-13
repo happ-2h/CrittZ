@@ -1,5 +1,5 @@
-import Vec2D from "../../../math/Vec2D";
 import Entity from "../../Entity";
+import Vec2D  from "../../../math/Vec2D";
 
 export default class Bullet extends Entity {
   #fromPlayer; // Was the bullet shot by the player

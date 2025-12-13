@@ -1,11 +1,17 @@
-import { GRAVITY } from "../../math/constants";
-import Vec2D from "../../math/Vec2D";
 import Pickup from "./Pickup";
+import Vec2D  from "../../math/Vec2D";
+
+import { GRAVITY } from "../../math/constants";
 
 export default class PickupJewel extends Pickup {
   #type;
   #value; // How much the jewel is worth
 
+  /**
+   * @param {Number} x    - x-position
+   * @param {Number} y    - y-position
+   * @param {Number} type - Type of the jewel
+   */
   constructor(x=0, y=0, type=0) {
     super(x, y);
 

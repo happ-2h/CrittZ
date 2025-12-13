@@ -1,16 +1,17 @@
-import { TILE_SIZE } from "../game/constants";
-import Renderer from "../gfx/Renderer";
 import Rectangle from "../math/shapes/Rectangle";
-import Vec2D from "../math/Vec2D";
+import Renderer  from "../gfx/Renderer";
+import Vec2D     from "../math/Vec2D";
+
+import { TILE_SIZE } from "../game/constants";
 
 export default class Entity {
-  #src;   // Image blit source rectangle
-  #dst;   // Canvas destination rectangle
+  #src;        // Image blit source rectangle
+  #dst;        // Canvas destination rectangle
 
   // Physics
-  #dir;   // Directional vector
-  #vel;   // Velocity vector
-  #accel; // Acceleration vector
+  #dir;        // Directional vector
+  #vel;        // Velocity vector
+  #accel;      // Acceleration vector
 
   // States
   #isJumping;  // Is the player jumping
@@ -18,10 +19,10 @@ export default class Entity {
   #isHurt;     // Has the entitiy been hurt
 
   // Stats
-  #exp;     // Experience points
-  #expNext; // Experience needed to level up
-  #level;   // Level number
-  #stats;   // Stats object
+  #exp;        // Experience points
+  #expNext;    // Experience needed to level up
+  #level;      // Level number
+  #stats;      // Stats object
 
   // Animation
   #frame;      // Current frame
@@ -30,8 +31,8 @@ export default class Entity {
   #frameDelay; // Frame change delay
 
   // Other
-  #invTimer; // Invincibility timer
-  #invDelay; // Invincibility delay
+  #invTimer;   // Invincibility timer
+  #invDelay;   // Invincibility delay
 
   constructor(x=0, y=0) {
     if (this.constructor === Entity)

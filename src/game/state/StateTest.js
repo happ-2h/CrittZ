@@ -1,10 +1,10 @@
-import Crow from "../../entity/mobile/enemy/crow/Crow";
-import PlayerChicken from "../../entity/mobile/player/PlayerChicken";
-import Shop from "../../entity/pickup/Shop";
-import Skin from "../../gfx/ui/Skin";
+import Crow          from "../../entity/mobile/enemy/crow/Crow";
 import EntityHandler from "../../utils/EntityHandler";
-import MapHandler from "../../utils/MapHandler";
-import State from "./State";
+import MapHandler    from "../../utils/MapHandler";
+import PlayerChicken from "../../entity/mobile/player/PlayerChicken";
+import Shop          from "../../entity/pickup/Shop";
+import Skin          from "../../gfx/ui/Skin";
+import State         from "./State";
 
 export default class StateTest extends State {
   #slimeSpawnDelay; // Spawn time  for slime

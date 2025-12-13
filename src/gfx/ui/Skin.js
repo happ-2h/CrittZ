@@ -1,8 +1,8 @@
+import Icon       from "./Icon";
 import KeyHandler from "../../input/KeyHandler";
-import Rectangle from "../../math/shapes/Rectangle";
-import Vec2D from "../../math/Vec2D";
-import Icon from "./Icon";
-import Text from "./Text";
+import Rectangle  from "../../math/shapes/Rectangle";
+import Text       from "./Text";
+import Vec2D      from "../../math/Vec2D";
 
 let instance = null;
 

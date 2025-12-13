@@ -23,7 +23,7 @@ export default class Slime extends Enemy {
 
     this.frameDelay = 0.2;
 
-    if (this.dir.x === 1)       this.setFrames(64, 66);
+    if      (this.dir.x ===  1) this.setFrames(64, 66);
     else if (this.dir.x === -1) this.setFrames(65, 67);
   }
 
@@ -52,13 +52,13 @@ export default class Slime extends Enemy {
         this.#dirTimer = 0;
         this.#dirDelay = Math.random() * 3;
 
-        if (this.dir.x === 1)       this.setFrames(64, 66);
+        if      (this.dir.x ===  1) this.setFrames(64, 66);
         else if (this.dir.x === -1) this.setFrames(65, 67);
       }
 
       let nextx = this.dst.x + this.vel.x * this.dir.x * dt;
 
-      if (nextx <= 8)        nextx = 8;
+      if      (nextx <=   8) nextx =   8;
       else if (nextx >= 112) nextx = 112;
 
       this.dst.x = nextx;

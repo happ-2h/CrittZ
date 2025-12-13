@@ -1,11 +1,15 @@
+import BulletGun     from "../../mobile/bullet/gun/BulletGun";
 import EntityHandler from "../../../utils/EntityHandler";
-import BulletGun from "../../mobile/bullet/gun/BulletGun";
-import Weapon from "../Weapon";
+import Weapon        from "../Weapon";
 
 export default class Gun extends Weapon {
   #fireRate;  // Rate of fire
   #fireTimer; // Timer for firing
 
+  /**
+   * @param {Number} x  - x-position
+   * @param {Number} y  - y-position
+   */
   constructor(x=0, y=0) {
     super(x, y);
 
@@ -17,6 +21,12 @@ export default class Gun extends Weapon {
 
   init() {}
 
+  /**
+   * @brief Updates the sword
+   *
+   * @param {Entity} owner - Owner of the weapon
+   * @param {Number} dt    - Delta time value
+   */
   update(owner, dt) {
     this.#fireTimer += dt;
 

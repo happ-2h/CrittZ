@@ -1,17 +1,18 @@
-import { GAME_WIDTH } from "../../../../game/constants";
-import { GRAVITY } from "../../../../math/constants";
+import Bat           from "../../enemy/bat/Bat";
+import BossBat       from "../../enemy/boss/BossBat";
+import BossCat       from "../../enemy/boss/BossCat";
+import BossSlime     from "../../enemy/boss/BossSlime";
+import Bullet        from "../Bullet";
+import Crow          from "../../enemy/crow/Crow";
 import EntityHandler from "../../../../utils/EntityHandler";
-import PickupJewel from "../../../pickup/PickupJewel";
-import Bat from "../../enemy/bat/Bat";
-import BossBat from "../../enemy/boss/BossBat";
-import BossCat from "../../enemy/boss/BossCat";
-import BossSlime from "../../enemy/boss/BossSlime";
-import Crow from "../../enemy/crow/Crow";
-import Frog from "../../enemy/frog/Frog";
-import Slime from "../../enemy/slime/Slime";
-import Squid from "../../enemy/squid/Squid";
+import Frog          from "../../enemy/frog/Frog";
 import ParticleSlime from "../../particle/ParticleSlime";
-import Bullet from "../Bullet";
+import PickupJewel   from "../../../pickup/PickupJewel";
+import Slime         from "../../enemy/slime/Slime";
+import Squid         from "../../enemy/squid/Squid";
+
+import { GAME_WIDTH } from "../../../../game/constants";
+import { GRAVITY }    from "../../../../math/constants";
 
 export default class Snowball extends Bullet {
   #owner; // Reference to entity who shot the snowball
@@ -38,11 +39,11 @@ export default class Snowball extends Bullet {
     let nextx = this.dst.x + this.vel.x * this.dir.x * dt;
     let nexty = this.dst.y + this.vel.y * dt;
 
+    // Remove if off screen
     if (
       nextx <= 0 || nextx >= GAME_WIDTH ||
       nexty >= 48
-    )
-      EntityHandler.remove(this);
+    ) EntityHandler.remove(this);
 
     EntityHandler.enemies.forEach(e => {
       if (this.dst.intersects(e.dst)) {

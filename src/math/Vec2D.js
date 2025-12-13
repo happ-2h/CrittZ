@@ -68,6 +68,9 @@ export default class Vec2D {
     this.#y = y;
   }
 
+  /**
+   * @returns Length of the vector
+   */
   get length() {
     return Math.sqrt(this.#x * this.#x + this.#y * this.#y);
   }

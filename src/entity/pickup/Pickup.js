@@ -1,7 +1,5 @@
 import Entity from "../Entity";
 
 export default class Pickup extends Entity {
-  constructor(x=0, y=0) {
-    super(x, y);
-  }
+  constructor(x=0, y=0) { super(x, y); }
 };

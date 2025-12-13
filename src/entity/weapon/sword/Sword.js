@@ -1,16 +1,16 @@
+import Bat           from "../../mobile/enemy/bat/Bat";
+import BossBat       from "../../mobile/enemy/boss/BossBat";
+import BossCat       from "../../mobile/enemy/boss/BossCat";
+import BossSlime     from "../../mobile/enemy/boss/BossSlime";
+import Crow          from "../../mobile/enemy/crow/Crow";
+import Entity        from "../../Entity";
 import EntityHandler from "../../../utils/EntityHandler";
-import Entity from "../../Entity";
-import Bat from "../../mobile/enemy/bat/Bat";
-import BossBat from "../../mobile/enemy/boss/BossBat";
-import BossCat from "../../mobile/enemy/boss/BossCat";
-import BossSlime from "../../mobile/enemy/boss/BossSlime";
-import Crow from "../../mobile/enemy/crow/Crow";
-import Frog from "../../mobile/enemy/frog/Frog";
-import Slime from "../../mobile/enemy/slime/Slime";
-import Squid from "../../mobile/enemy/squid/Squid";
+import Frog          from "../../mobile/enemy/frog/Frog";
 import ParticleSlime from "../../mobile/particle/ParticleSlime";
-import PickupJewel from "../../pickup/PickupJewel";
-import Weapon from "../Weapon";
+import PickupJewel   from "../../pickup/PickupJewel";
+import Slime         from "../../mobile/enemy/slime/Slime";
+import Squid         from "../../mobile/enemy/squid/Squid";
+import Weapon        from "../Weapon";
 
 export default class Sword extends Weapon {
   constructor(x=0, y=0) {
@@ -108,16 +108,13 @@ export default class Sword extends Weapon {
             e instanceof Crow  ||
             e instanceof Frog  ||
             e instanceof Squid
-          ) {
-            ++EntityHandler.getPlayer(0).enemiesKilled;
-          }
+          ) ++EntityHandler.getPlayer(0).enemiesKilled;
+
           else if (
             e instanceof BossBat   ||
             e instanceof BossCat   ||
             e instanceof BossSlime
-          ) {
-            ++EntityHandler.getPlayer(0).bossesKilled;
-          }
+          ) ++EntityHandler.getPlayer(0).bossesKilled;
         }
       }
     });

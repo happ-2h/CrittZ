@@ -1,6 +1,7 @@
-import { GAME_WIDTH } from "../../../../game/constants";
+import Enemy         from "../Enemy";
 import EntityHandler from "../../../../utils/EntityHandler";
-import Enemy from "../Enemy";
+
+import { GAME_WIDTH } from "../../../../game/constants";
 
 export default class Squid extends Enemy {
   #freq; // Frequency for y sine movement

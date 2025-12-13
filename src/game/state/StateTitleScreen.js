@@ -1,17 +1,18 @@
-import Character from "../../entity/mobile/npc/Character";
-import Renderer from "../../gfx/Renderer";
-import Cursor from "../../gfx/ui/Cursor";
-import Icon from "../../gfx/ui/Icon";
-import Pressable from "../../gfx/ui/Pressable";
-import KeyHandler from "../../input/KeyHandler";
-import Rectangle from "../../math/shapes/Rectangle";
-import Vec2D from "../../math/Vec2D";
+import Character     from "../../entity/mobile/npc/Character";
+import Cursor        from "../../gfx/ui/Cursor";
 import EntityHandler from "../../utils/EntityHandler";
-import StateHandler from "../../utils/StateHandler";
-import { SCREEN_HEIGHT, SCREEN_WIDTH } from "../constants";
-import State from "./State";
+import Icon          from "../../gfx/ui/Icon";
+import KeyHandler    from "../../input/KeyHandler";
+import Pressable     from "../../gfx/ui/Pressable";
+import Rectangle     from "../../math/shapes/Rectangle";
+import Renderer      from "../../gfx/Renderer";
+import State         from "./State";
+import StateHandler  from "../../utils/StateHandler";
 import StateMainShop from "./StateMainShop";
-import StatePlay from "./StatePlay";
+import StatePlay     from "./StatePlay";
+import Vec2D         from "../../math/Vec2D";
+
+import { SCREEN_HEIGHT, SCREEN_WIDTH } from "../constants";
 
 export default class StateTitleScreen extends State {
   #selection;      // Menu item selection

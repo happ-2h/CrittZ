@@ -1,12 +1,12 @@
-import Icon from "../../gfx/ui/Icon";
-import Skin from "../../gfx/ui/Skin";
-import Text from "../../gfx/ui/Text";
-import KeyHandler from "../../input/KeyHandler";
-import Rectangle from "../../math/shapes/Rectangle";
-import Vec2D from "../../math/Vec2D";
 import EntityHandler from "../../utils/EntityHandler";
-import StateHandler from "../../utils/StateHandler";
-import State from "./State";
+import Icon          from "../../gfx/ui/Icon";
+import KeyHandler    from "../../input/KeyHandler";
+import Rectangle     from "../../math/shapes/Rectangle";
+import Skin          from "../../gfx/ui/Skin";
+import State         from "./State";
+import StateHandler  from "../../utils/StateHandler";
+import Text          from "../../gfx/ui/Text";
+import Vec2D         from "../../math/Vec2D";
 
 export default class StateShop extends State {
   #playerType;    // Chicken, goose, or penguin
@@ -100,12 +100,10 @@ export default class StateShop extends State {
   init() {}
 
   update(dt) {
-    if (KeyHandler.isPressed("down")) {
+    if (KeyHandler.isPressed("down"))
       this.#selection = this.#selection === 3 ? 0 : this.#selection + 1;
-    }
-    else if (KeyHandler.isPressed("up")) {
+    else if (KeyHandler.isPressed("up"))
       this.#selection = this.#selection === 0 ? 3 : this.#selection - 1;
-    }
     else if (KeyHandler.isPressed("ActionA")) {
       switch(this.#selection) {
         // Weapon upgrade

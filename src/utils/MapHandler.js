@@ -16,7 +16,7 @@ class _MapHandler {
   /**
    * @brief Loads a map
    *
-   * @param {String} textureID - ID to assign to the map
+   * @param {String} mapID     - ID to assign to the map
    * @param {String} filename  - File name of the map
    *
    * @returns Resolve if map successfully loaded; reject otherwise
@@ -26,7 +26,7 @@ class _MapHandler {
       if (this.#maps[mapID]) this.#maps[mapID] = null;
 
       fetch(`res/map/${filename}`)
-        .then(val => val.json())
+        .then(val  => val.json())
         .then(data => {
           this.#maps[mapID] = new Map(data);
           res(`${filename} loaded`);

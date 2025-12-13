@@ -1,9 +1,10 @@
-import Renderer from "../gfx/Renderer";
-import Skin from "../gfx/ui/Skin";
-import AssetHandler from "../utils/AssetHandler";
-import StateHandler from "../utils/StateHandler";
-import { SCREEN_HEIGHT, SCREEN_WIDTH } from "./constants";
+import AssetHandler     from "../utils/AssetHandler";
+import Renderer         from "../gfx/Renderer";
+import Skin             from "../gfx/ui/Skin";
+import StateHandler     from "../utils/StateHandler";
 import StateTitleScreen from "./state/StateTitleScreen";
+
+import { SCREEN_HEIGHT, SCREEN_WIDTH } from "./constants";
 
 export default class Game {
   #cnv;  // HTML5 canvas reference

@@ -1,12 +1,13 @@
-import Icon from "../../gfx/ui/Icon";
-import Text from "../../gfx/ui/Text";
-import KeyHandler from "../../input/KeyHandler";
-import Rectangle from "../../math/shapes/Rectangle";
-import Vec2D from "../../math/Vec2D";
 import EntityHandler from "../../utils/EntityHandler";
-import StateHandler from "../../utils/StateHandler";
+import Icon          from "../../gfx/ui/Icon";
+import KeyHandler    from "../../input/KeyHandler";
+import Rectangle     from "../../math/shapes/Rectangle";
+import State         from "./State";
+import StateHandler  from "../../utils/StateHandler";
+import Text          from "../../gfx/ui/Text";
+import Vec2D         from "../../math/Vec2D";
+
 import { TILE_SIZE } from "../constants";
-import State from "./State";
 
 export default class StatePause extends State {
   #selection;          // Selection of settings

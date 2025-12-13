@@ -1,9 +1,10 @@
-import { GAME_WIDTH } from "../../../../game/constants";
-import { lerp } from "../../../../math/utils";
+import BulletBall    from "../../bullet/ball/BulletBall";
+import BulletSeek    from "../../bullet/seek/BulletSeek";
+import Enemy         from "../Enemy";
 import EntityHandler from "../../../../utils/EntityHandler";
-import BulletBall from "../../bullet/ball/BulletBall";
-import BulletSeek from "../../bullet/seek/BulletSeek";
-import Enemy from "../Enemy";
+
+import { GAME_WIDTH } from "../../../../game/constants";
+import { lerp }       from "../../../../math/utils";
 
 export default class BossBat extends Enemy {
   #locations;  // List of target locations

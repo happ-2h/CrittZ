@@ -1,6 +1,12 @@
-import { SCALE, SCREEN_HEIGHT, SCREEN_WIDTH, TILE_SIZE } from "../game/constants";
-import Rectangle from "../math/shapes/Rectangle";
+import Rectangle      from "../math/shapes/Rectangle";
 import TextureHandler from "../utils/TextureHandler";
+
+import {
+  SCALE,
+  SCREEN_HEIGHT,
+  SCREEN_WIDTH,
+  TILE_SIZE
+} from "../game/constants";
 
 let instance = null;
 
@@ -82,7 +88,7 @@ class _Renderer {
    *
    * @param {Number} x      - x-position to blit
    * @param {Number} y      - y-position to blit
-   * @param {Number} width  - Width of the blit
+   * @param {Number} width  - Width  of the blit
    * @param {Number} height - Height of the blit
    *
    * @returns ImageData object

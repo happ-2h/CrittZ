@@ -1,8 +1,9 @@
-import { GAME_WIDTH, TILE_SIZE } from "../../../../game/constants";
-import Vec2D from "../../../../math/Vec2D";
+import Enemy         from "../Enemy";
 import EntityHandler from "../../../../utils/EntityHandler";
 import ParticleSlime from "../../particle/ParticleSlime";
-import Enemy from "../Enemy";
+import Vec2D         from "../../../../math/Vec2D";
+
+import { GAME_WIDTH, TILE_SIZE } from "../../../../game/constants";
 
 export default class Crow extends Enemy {
   constructor(x=0, y=0) {
@@ -49,5 +50,4 @@ export default class Crow extends Enemy {
 
     this.animate(dt);
   }
-
 };

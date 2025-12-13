@@ -1,7 +1,7 @@
-import Vec2D from "../../../../math/Vec2D";
+import Bullet        from "../Bullet";
+import Entity        from "../../../Entity";
 import EntityHandler from "../../../../utils/EntityHandler";
-import Entity from "../../../Entity";
-import Bullet from "../Bullet";
+import Vec2D         from "../../../../math/Vec2D";
 
 export default class Paw extends Bullet {
   #delay;       // Delay to drop paw

@@ -1,6 +1,6 @@
-import Vec2D from "../../../../math/Vec2D";
+import Bullet        from "../Bullet";
 import EntityHandler from "../../../../utils/EntityHandler";
-import Bullet from "../Bullet";
+import Vec2D         from "../../../../math/Vec2D";
 
 export default class BulletGravity extends Bullet {
   constructor(x=0, y=0) {

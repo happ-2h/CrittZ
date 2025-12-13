@@ -1,13 +1,15 @@
-import Bullet from "../entity/mobile/bullet/Bullet";
-import Bat from "../entity/mobile/enemy/bat/Bat";
-import Enemy from "../entity/mobile/enemy/Enemy";
-import Slime from "../entity/mobile/enemy/slime/Slime";
-import Squid from "../entity/mobile/enemy/squid/Squid";
-import Character from "../entity/mobile/npc/Character";
-import Particle from "../entity/mobile/particle/Particle";
+import Bat           from "../entity/mobile/enemy/bat/Bat";
+import Bullet        from "../entity/mobile/bullet/Bullet";
+import Character     from "../entity/mobile/npc/Character";
+import Enemy         from "../entity/mobile/enemy/Enemy";
+import Entity        from "../entity/Entity";
+import Particle      from "../entity/mobile/particle/Particle";
 import ParticleSlime from "../entity/mobile/particle/ParticleSlime";
-import Player from "../entity/mobile/player/Player";
-import Pickup from "../entity/pickup/Pickup";
+import Pickup        from "../entity/pickup/Pickup";
+import Player        from "../entity/mobile/player/Player";
+import Slime         from "../entity/mobile/enemy/slime/Slime";
+import Squid         from "../entity/mobile/enemy/squid/Squid";
+
 import { GAME_WIDTH } from "../game/constants";
 
 let instance = null;
@@ -35,13 +37,12 @@ class _EntityHandler {
 
   // Add entities
   /**
-   * @brief Adds an entity to the list
+   * @brief Adds an entity to its respective list
    *
-   * @param {Player} player - Player entity
+   * @param {Entity} entity - Entity to add to its respective list
    */
   add(entity) {
-    // if (player instanceof Player) this.#players.push(player);
-    if (entity instanceof Player)         this.#players.push(entity);
+    if      (entity instanceof Player)    this.#players.push(entity);
     else if (entity instanceof Enemy)     this.#enemies.push(entity);
     else if (entity instanceof Particle)  this.#particles.push(entity);
     else if (entity instanceof Character) this.#npcs.push(entity);
@@ -74,7 +75,7 @@ class _EntityHandler {
   }
 
   /**
-   * @brief Adds a bat to the enemies list
+   * @brief Adds a squid to the enemies list
    */
   addSquid() {
     this.add(
@@ -87,9 +88,9 @@ class _EntityHandler {
 
   // Remove entities
   /**
-   * @brief Removes entity from the list
+   * @brief Removes entity from its respective list
    *
-   * @param {Player} entity - Entity to remove
+   * @param {Entity} entity - Entity to remove from its respective list
    */
   remove(entity) {
     if (entity instanceof Player)
@@ -104,6 +105,9 @@ class _EntityHandler {
       this.#pickups.splice(this.#pickups.indexOf(entity), 1);
   }
 
+  /**
+   * @brief Removes all enemies from the enemy list
+   */
   removeEnemies() {
     this.#enemies.forEach(e => {
       this.remove(e);
@@ -229,6 +233,7 @@ class _EntityHandler {
    * @brief Get the player at index n
    *
    * @param {Number} n - Index of player
+   *
    * @returns Player at index n
    */
   getPlayer(n=0) {

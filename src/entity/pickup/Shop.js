@@ -1,6 +1,7 @@
-import { GRAVITY } from "../../math/constants";
 import EntityHandler from "../../utils/EntityHandler";
-import Pickup from "./Pickup";
+import Pickup        from "./Pickup";
+
+import { GRAVITY } from "../../math/constants";
 
 export default class Shop extends Pickup {
   #state; // State of the shop

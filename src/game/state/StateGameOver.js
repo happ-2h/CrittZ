@@ -1,13 +1,14 @@
-import Renderer from "../../gfx/Renderer";
-import Text from "../../gfx/ui/Text";
-import KeyHandler from "../../input/KeyHandler";
-import Vec2D from "../../math/Vec2D";
-import EntityHandler from "../../utils/EntityHandler";
-import StateHandler from "../../utils/StateHandler";
-import { SCREEN_HEIGHT, SCREEN_WIDTH } from "../constants";
-import User from "../user/User";
-import State from "./State";
+import EntityHandler    from "../../utils/EntityHandler";
+import KeyHandler       from "../../input/KeyHandler";
+import Renderer         from "../../gfx/Renderer";
+import State            from "./State";
+import StateHandler     from "../../utils/StateHandler";
 import StateTitleScreen from "./StateTitleScreen";
+import Text             from "../../gfx/ui/Text";
+import User             from "../user/User";
+import Vec2D            from "../../math/Vec2D";
+
+import { SCREEN_HEIGHT, SCREEN_WIDTH } from "../constants";
 
 export default class StateGameOver extends State {
   #txtEnemiesKilled;

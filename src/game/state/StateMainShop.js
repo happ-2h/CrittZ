@@ -1,17 +1,18 @@
-import PlayerPreview from "../../entity/mobile/npc/PlayerPreview";
-import Renderer from "../../gfx/Renderer";
-import Icon from "../../gfx/ui/Icon";
-import Skin from "../../gfx/ui/Skin";
-import Text from "../../gfx/ui/Text";
-import KeyHandler from "../../input/KeyHandler";
-import Rectangle from "../../math/shapes/Rectangle";
-import Vec2D from "../../math/Vec2D";
-import EntityHandler from "../../utils/EntityHandler";
-import StateHandler from "../../utils/StateHandler";
-import { SCREEN_HEIGHT, SCREEN_WIDTH } from "../constants";
-import User from "../user/User";
-import State from "./State";
+import EntityHandler    from "../../utils/EntityHandler";
+import Icon             from "../../gfx/ui/Icon";
+import KeyHandler       from "../../input/KeyHandler";
+import PlayerPreview    from "../../entity/mobile/npc/PlayerPreview";
+import Rectangle        from "../../math/shapes/Rectangle";
+import Renderer         from "../../gfx/Renderer";
+import Skin             from "../../gfx/ui/Skin";
+import State            from "./State";
+import StateHandler     from "../../utils/StateHandler";
 import StateTitleScreen from "./StateTitleScreen";
+import Text             from "../../gfx/ui/Text";
+import User             from "../user/User";
+import Vec2D            from "../../math/Vec2D";
+
+import { SCREEN_HEIGHT, SCREEN_WIDTH } from "../constants";
 
 export default class StateMainShop extends State {
   #page;
@@ -124,9 +125,8 @@ export default class StateMainShop extends State {
       StateHandler.push(new StateTitleScreen);
     }
 
-    if (this.#page >= 0 && this.#page <= 1) {
+    if (this.#page >= 0 && this.#page <= 1)
       this.#playerPreview.update(dt);
-    }
 
     KeyHandler.update();
   }

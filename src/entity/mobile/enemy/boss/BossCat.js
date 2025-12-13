@@ -1,8 +1,9 @@
-import { GAME_WIDTH } from "../../../../game/constants";
-import { GRAVITY } from "../../../../math/constants";
+import Enemy         from "../Enemy";
 import EntityHandler from "../../../../utils/EntityHandler";
-import Paw from "../../bullet/paw/Paw";
-import Enemy from "../Enemy";
+import Paw           from "../../bullet/paw/Paw";
+
+import { GAME_WIDTH } from "../../../../game/constants";
+import { GRAVITY }    from "../../../../math/constants";
 
 export default class BossCat extends Enemy {
   #fireDelay; // Delay time to fire paw

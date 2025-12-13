@@ -1,6 +1,6 @@
+import Icon      from "./Icon";
 import Rectangle from "../../math/shapes/Rectangle";
-import Vec2D from "../../math/Vec2D";
-import Icon from "./Icon";
+import Vec2D     from "../../math/Vec2D";
 
 export default class Text {
   #text; // Raw text
@@ -23,6 +23,9 @@ export default class Text {
     this.parse();
   }
 
+  /**
+   * @brief Parses the text
+   */
   parse() {
     this.#text.split('').forEach((c, n) => {
       const charCode = c.charCodeAt(0);
@@ -56,7 +59,7 @@ export default class Text {
           ));
         }
       }
-      // 0 - 1
+      // 0 - 9
       else if (charCode >= 48 && charCode <= 57) {
         if (this.#size === 0) {
           this.#imgs.push(new Icon(
@@ -111,6 +114,9 @@ export default class Text {
     });
   }
 
+  /**
+   * @brief Draws the text
+   */
   draw() {
     this.#imgs.forEach(i => i.draw());
   }

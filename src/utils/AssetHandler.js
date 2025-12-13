@@ -1,4 +1,4 @@
-import MapHandler from "./MapHandler";
+import MapHandler     from "./MapHandler";
 import TextureHandler from "./TextureHandler";
 
 let instance = null;

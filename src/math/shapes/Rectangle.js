@@ -1,5 +1,6 @@
-import { TILE_SIZE } from "../../game/constants";
 import Vec2D from "../Vec2D";
+
+import { TILE_SIZE } from "../../game/constants";
 
 export default class Rectangle {
   #pos; // Position (x, y)
@@ -8,7 +9,7 @@ export default class Rectangle {
   /**
    * @param {Number} x      - x-position of the rectangle
    * @param {Number} y      - y-position of the rectangle
-   * @param {Number} width  - Width of the rectangle
+   * @param {Number} width  - Width  of the rectangle
    * @param {Number} height - Height of the rectangle
    */
   constructor(x=0, y=0, width=TILE_SIZE, height=TILE_SIZE) {

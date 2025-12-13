@@ -1,12 +1,16 @@
-import EntityHandler from "../../../utils/EntityHandler";
-import Snowball from "../../mobile/bullet/snowball/Snowball";
+import EntityHandler    from "../../../utils/EntityHandler";
+import Snowball         from "../../mobile/bullet/snowball/Snowball";
 import SnowballStraight from "../../mobile/bullet/snowball/SnowballStraight";
-import Weapon from "../Weapon";
+import Weapon           from "../Weapon";
 
 export default class SnowballGun extends Weapon {
   #fireRate;  // Rate of fire
   #fireTimer; // Timer for firing
 
+  /**
+   * @param {Number} x - x-position
+   * @param {Number} y - y-position
+   */
   constructor(x=0, y=0) {
     super(x, y);
 
@@ -18,6 +22,12 @@ export default class SnowballGun extends Weapon {
 
   init() {}
 
+  /**
+   * @brief Updates the snowball gun
+   *
+   * @param {Entity} owner - Owner of the weapon
+   * @param {Number} dt    - Delta time value
+   */
   update(owner, dt) {
     this.#fireTimer += dt;
 

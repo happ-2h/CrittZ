@@ -1,13 +1,14 @@
-import StateGameOver from "../../../game/state/StateGameOver";
-import StateShop from "../../../game/state/StateShop";
-import Skin from "../../../gfx/ui/Skin";
-import KeyHandler from "../../../input/KeyHandler";
-import { GRAVITY } from "../../../math/constants";
 import EntityHandler from "../../../utils/EntityHandler";
-import StateHandler from "../../../utils/StateHandler";
-import Shop from "../../pickup/Shop";
-import Sword from "../../weapon/sword/Sword";
-import Player from "./Player";
+import KeyHandler    from "../../../input/KeyHandler";
+import Player        from "./Player";
+import Shop          from "../../pickup/Shop";
+import Skin          from "../../../gfx/ui/Skin";
+import StateGameOver from "../../../game/state/StateGameOver";
+import StateHandler  from "../../../utils/StateHandler";
+import StateShop     from "../../../game/state/StateShop";
+import Sword         from "../../weapon/sword/Sword";
+
+import { GRAVITY } from "../../../math/constants";
 
 export default class PlayerChicken extends Player {
   constructor() {

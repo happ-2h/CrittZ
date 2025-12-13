@@ -1,7 +1,8 @@
-import { GAME_WIDTH } from "../../../../game/constants";
+import BulletBall    from "../../bullet/ball/BulletBall";
+import Enemy         from "../Enemy";
 import EntityHandler from "../../../../utils/EntityHandler";
-import BulletBall from "../../bullet/ball/BulletBall";
-import Enemy from "../Enemy";
+
+import { GAME_WIDTH } from "../../../../game/constants";
 
 export default class Frog extends Enemy {
   #shootDelay; // Delay until frog shoots

@@ -1,5 +1,5 @@
 import Rectangle from "../../math/shapes/Rectangle";
-import Renderer from "../Renderer";
+import Renderer  from "../Renderer";
 
 export default class Cursor {
   #src; // Image blit source
@@ -20,6 +20,11 @@ export default class Cursor {
     this.#animFrames = [867, 868];
   }
 
+  /**
+   * @brief Updates the cursor
+   *
+   * @param {Number} dt - Delta time
+   */
   update(dt) {
     this.#animTimer += dt;
 
@@ -32,6 +37,9 @@ export default class Cursor {
     }
   }
 
+  /**
+   * @brief Draws the cursor
+   */
   draw() {
     Renderer.image(
       "spritesheet",

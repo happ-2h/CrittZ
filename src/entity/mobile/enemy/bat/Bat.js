@@ -1,6 +1,7 @@
-import { TILE_SIZE } from "../../../../game/constants";
+import Enemy         from "../Enemy";
 import EntityHandler from "../../../../utils/EntityHandler";
-import Enemy from "../Enemy";
+
+import { TILE_SIZE } from "../../../../game/constants";
 
 export default class Bat extends Enemy {
   constructor(x=0, y=0) {

@@ -1,6 +1,10 @@
-import { GAME_HEIGHT, GAME_WIDTH } from "../../../game/constants";
-import { GRAVITY } from "../../../math/constants";
 import Entity from "../../Entity";
+
+import {
+  GAME_HEIGHT,
+  GAME_WIDTH
+} from "../../../game/constants";
+import { GRAVITY } from "../../../math/constants";
 
 export default class Character extends Entity {
   #dirTimer;  // Timer for changing direction

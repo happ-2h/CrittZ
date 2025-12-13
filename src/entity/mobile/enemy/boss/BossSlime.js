@@ -1,5 +1,6 @@
-import { GAME_WIDTH } from "../../../../game/constants";
 import Enemy from "../Enemy";
+
+import { GAME_WIDTH } from "../../../../game/constants";
 
 export default class BossSlime extends Enemy {
   #waitTimer; // Time slime waits for getting hit ("vulnerable")

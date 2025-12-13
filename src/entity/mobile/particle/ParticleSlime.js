@@ -1,6 +1,7 @@
-import { GRAVITY } from "../../../math/constants";
 import EntityHandler from "../../../utils/EntityHandler";
-import Particle from "./Particle";
+import Particle      from "./Particle";
+
+import { GRAVITY } from "../../../math/constants";
 
 export default class ParticleSlime extends Particle {
   constructor(x=0, y=0, angle=0) {

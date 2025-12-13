@@ -1,18 +1,19 @@
-import BossBat from "../../entity/mobile/enemy/boss/BossBat";
-import BossCat from "../../entity/mobile/enemy/boss/BossCat";
-import BossSlime from "../../entity/mobile/enemy/boss/BossSlime";
-import Crow from "../../entity/mobile/enemy/crow/Crow";
-import Frog from "../../entity/mobile/enemy/frog/Frog";
-import PlayerChicken from "../../entity/mobile/player/PlayerChicken";
-import Shop from "../../entity/pickup/Shop";
-import Skin from "../../gfx/ui/Skin";
-import KeyHandler from "../../input/KeyHandler";
+import BossBat       from "../../entity/mobile/enemy/boss/BossBat";
+import BossCat       from "../../entity/mobile/enemy/boss/BossCat";
+import BossSlime     from "../../entity/mobile/enemy/boss/BossSlime";
+import Crow          from "../../entity/mobile/enemy/crow/Crow";
 import EntityHandler from "../../utils/EntityHandler";
-import MapHandler from "../../utils/MapHandler";
-import StateHandler from "../../utils/StateHandler";
+import Frog          from "../../entity/mobile/enemy/frog/Frog";
+import KeyHandler    from "../../input/KeyHandler";
+import MapHandler    from "../../utils/MapHandler";
+import PlayerChicken from "../../entity/mobile/player/PlayerChicken";
+import Shop          from "../../entity/pickup/Shop";
+import Skin          from "../../gfx/ui/Skin";
+import State         from "./State";
+import StateHandler  from "../../utils/StateHandler";
+import StatePause    from "./StatePause";
+
 import { GAME_WIDTH } from "../constants";
-import State from "./State";
-import StatePause from "./StatePause";
 
 export default class StatePlay extends State {
   #time;        // Keeps track of time, in seconds, until boss
@@ -36,7 +37,6 @@ export default class StatePlay extends State {
     this.#wave  =  1;
     this.#state =  0;
 
-    // this.#spawnDelay = 3 - (3*(this.#wave/10));
     this.#spawnDelay  = 2;
     this.#spawnTimer  = 0;
     this.#shopSpawned = false;
@@ -47,9 +47,7 @@ export default class StatePlay extends State {
     this.#nKilledBosses  = 0;
   }
 
-  onEnter() {
-    EntityHandler.add(new PlayerChicken);
-  }
+  onEnter() { EntityHandler.add(new PlayerChicken); }
   onExit() {}
 
   init() {}
@@ -66,6 +64,7 @@ export default class StatePlay extends State {
     // Normal gameplay
     else if (this.#state === 1) {
       this.#time -= dt;
+
       if (this.#time <= 0) {
         this.#time = 0;
         this.#state = 2;

@@ -1,8 +1,9 @@
-import { TILE_SIZE } from "../../game/constants";
+import Icon      from "./Icon";
 import Rectangle from "../../math/shapes/Rectangle";
-import Vec2D from "../../math/Vec2D";
-import Icon from "./Icon";
-import Text from "./Text";
+import Text      from "./Text";
+import Vec2D     from "../../math/Vec2D";
+
+import { TILE_SIZE } from "../../game/constants";
 
 export default class Pressable {
   #icon;  // Icon graphics

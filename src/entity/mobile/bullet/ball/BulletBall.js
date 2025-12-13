@@ -1,6 +1,7 @@
-import { GAME_WIDTH } from "../../../../game/constants";
+import Bullet        from "../Bullet";
 import EntityHandler from "../../../../utils/EntityHandler";
-import Bullet from "../Bullet";
+
+import { GAME_WIDTH } from "../../../../game/constants";
 
 export default class BulletBall extends Bullet {
   constructor(x=0, y=0, dir=1) {
@@ -22,7 +23,6 @@ export default class BulletBall extends Bullet {
     let nextx = this.dst.x + this.vel.x * this.dir.x * dt;
 
     if (nextx <= 0 || nextx >= GAME_WIDTH) EntityHandler.remove(this);
-
 
     this.dst.x = nextx;
   }

@@ -1,5 +1,5 @@
-import Skin from "../../../gfx/ui/Skin";
 import Entity from "../../Entity";
+import Skin   from "../../../gfx/ui/Skin";
 
 export default class Player extends Entity {
   #weapon; // Current weapon

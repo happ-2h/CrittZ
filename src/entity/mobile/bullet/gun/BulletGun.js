@@ -1,20 +1,28 @@
-import { GAME_WIDTH } from "../../../../game/constants";
+import Bat           from "../../enemy/bat/Bat";
+import BossBat       from "../../enemy/boss/BossBat";
+import BossCat       from "../../enemy/boss/BossCat";
+import BossSlime     from "../../enemy/boss/BossSlime";
+import Bullet        from "../Bullet";
+import Crow          from "../../enemy/crow/Crow";
+import Entity        from "../../../Entity";
 import EntityHandler from "../../../../utils/EntityHandler";
-import PickupJewel from "../../../pickup/PickupJewel";
-import Bat from "../../enemy/bat/Bat";
-import BossBat from "../../enemy/boss/BossBat";
-import BossCat from "../../enemy/boss/BossCat";
-import BossSlime from "../../enemy/boss/BossSlime";
-import Crow from "../../enemy/crow/Crow";
-import Frog from "../../enemy/frog/Frog";
-import Slime from "../../enemy/slime/Slime";
-import Squid from "../../enemy/squid/Squid";
+import Frog          from "../../enemy/frog/Frog";
 import ParticleSlime from "../../particle/ParticleSlime";
-import Bullet from "../Bullet";
+import PickupJewel   from "../../../pickup/PickupJewel";
+import Slime         from "../../enemy/slime/Slime";
+import Squid         from "../../enemy/squid/Squid";
+
+import { GAME_WIDTH } from "../../../../game/constants";
 
 export default class BulletGun extends Bullet {
   #owner; // Entity reference
 
+  /**
+   * @param {Number} x     - x-position
+   * @param {Number} y     - y-position
+   * @param {Number} dir   - Direction
+   * @param {Entity} owner - Owner of the bullet (shooter)
+   */
   constructor(x=0, y=0, dir=1, owner=null) {
     super(x, y, 0, true);
 
@@ -101,16 +109,12 @@ export default class BulletGun extends Bullet {
             e instanceof Crow  ||
             e instanceof Frog  ||
             e instanceof Squid
-          ) {
-            ++EntityHandler.getPlayer(0).enemiesKilled;
-          }
+          ) ++EntityHandler.getPlayer(0).enemiesKilled;
           else if (
             e instanceof BossBat   ||
             e instanceof BossCat   ||
             e instanceof BossSlime
-          ) {
-            ++EntityHandler.getPlayer(0).bossesKilled;
-          }
+          ) ++EntityHandler.getPlayer(0).bossesKilled;
         }
       }
     });
