@@ -163,7 +163,7 @@ export default class BossCat extends Enemy {
         this.isHurt = false;
         this.state = 3;
         this.invTimer = 3;
-        this.src.x +=16;
+        this.src.x += 16;
       }
     }
     // Hurt animation

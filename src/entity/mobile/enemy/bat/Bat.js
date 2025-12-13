@@ -48,8 +48,7 @@ export default class Bat extends Enemy {
 
     if (nexty >= 56) EntityHandler.remove(this);
 
-    this.dst.x = nextx;
-    this.dst.y = nexty;
+    this.dst.set(nextx, nexty);
 
     this.animate(dt);
   }

@@ -10,7 +10,10 @@ import Player        from "../entity/mobile/player/Player";
 import Slime         from "../entity/mobile/enemy/slime/Slime";
 import Squid         from "../entity/mobile/enemy/squid/Squid";
 
-import { GAME_WIDTH } from "../game/constants";
+import {
+  GAME_WIDTH,
+  TILE_SIZE
+} from "../game/constants";
 
 let instance = null;
 
@@ -56,7 +59,7 @@ class _EntityHandler {
   addSlime() {
     this.add(
       new Slime(
-        Math.random() * (112 - 8 + 1) + 8,
+        Math.random() * 105 + TILE_SIZE,
         56
       )
     );
@@ -68,7 +71,7 @@ class _EntityHandler {
   addBat() {
     this.add(
       new Bat(
-        Math.random() * (112 - 8 + 1) + 8,
+        Math.random() * 105 + TILE_SIZE,
         0
       )
     );
@@ -80,7 +83,7 @@ class _EntityHandler {
   addSquid() {
     this.add(
       new Squid(
-        Math.random() >= 0.5 ? -8 : GAME_WIDTH,
+        Math.random() >= 0.5 ? -TILE_SIZE : GAME_WIDTH,
         0
       )
     );
@@ -185,6 +188,19 @@ class _EntityHandler {
     this.#pickups.forEach(p => p.update(dt));
   }
 
+  /**
+   * @brief Updates all entities except title screen NPCs
+   *
+   * @param {Number} dt - Delta time
+   */
+  updateAll(dt) {
+    this.#particles.forEach(p => p.update(dt));
+    this.#players.forEach(p => p.update(dt));
+    this.#enemies.forEach(e => e.update(dt));
+    this.#bullets.forEach(b => b.update(dt));
+    this.#pickups.forEach(p => p.update(dt));
+  }
+
   // Draw entities
   /**
    * @brief Draws players
@@ -225,6 +241,17 @@ class _EntityHandler {
    * @brief Draws pickups
    */
   drawPickups() {
+    this.#pickups.forEach(p => p.draw());
+  }
+
+  /**
+   * @brief Updates all entities except title screen NPCs
+   */
+  drawAll() {
+    this.#particles.forEach(p => p.draw());
+    this.#players.forEach(p => p.draw());
+    this.#enemies.forEach(e => e.draw());
+    this.#bullets.forEach(b => b.draw());
     this.#pickups.forEach(p => p.draw());
   }
 

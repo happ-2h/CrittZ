@@ -90,8 +90,7 @@ export default class Character extends Entity {
       this.isGrounded = true;
     }
 
-    this.dst.x = nextx;
-    this.dst.y = nexty;
+    this.dst.set(nextx, nexty);
 
     this.animate(dt);
   }

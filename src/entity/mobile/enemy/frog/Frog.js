@@ -35,9 +35,7 @@ export default class Frog extends Enemy {
     this.frameDelay = 0.2;
   }
 
-  init() {
-
-  }
+  init() {}
 
   update(dt) {
     // Coming into stage

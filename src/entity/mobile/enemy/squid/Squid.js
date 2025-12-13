@@ -39,8 +39,7 @@ export default class Squid extends Enemy {
       this.dir.x ===  1 && nextx >= GAME_WIDTH
     ) EntityHandler.remove(this);
 
-    this.dst.x = nextx;
-    this.dst.y = nexty;
+    this.dst.set(nextx, nexty);
 
     this.animate(dt);
   }

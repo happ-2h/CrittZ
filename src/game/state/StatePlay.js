@@ -57,96 +57,115 @@ export default class StatePlay extends State {
     if (KeyHandler.isPressed("ActionB")) StateHandler.push(new StatePause);
     KeyHandler.update();
 
-    // TODO show wave number or player fall from sky
-    if (this.#state === 0) {
-      this.#state = 1;
-    }
-    // Normal gameplay
-    else if (this.#state === 1) {
-      this.#time -= dt;
-
-      if (this.#time <= 0) {
-        this.#time = 0;
-        this.#state = 2;
-      }
-
-      this.#spawnTimer += dt;
-      if (this.#spawnTimer >= this.#spawnDelay) {
-        this.#spawnTimer = 0;
-
-        // Slime
-        for (let i = 0; i < this.#wave; ++i) EntityHandler.addSlime();
-
-        // Bat
-        if (Math.random() <= 0.5) EntityHandler.addBat();
-
-        // Squid
-        if (Math.random() <= 0.2) EntityHandler.addSquid();
-
-        // Crow
-        if (Math.random() <= 0.3) EntityHandler.add(new Crow);
-
-        // Frog
-        if (Math.random() <= 0.3) EntityHandler.add(new Frog);
-      }
-
-      // Spawn shop
-      if (!this.#shopSpawned && (this.#time|0) === 30) {
-        this.#shopSpawned = true;
-        EntityHandler.add(new Shop);
-      }
-
-      Skin.setTime(this.#time);
-    }
-    // Clean up
-    else if (this.#state === 2) {
-      EntityHandler.removeEnemies();
-
-      if (EntityHandler.particles.length === 0) {
-        this.#state = 3;
-
-        if ((this.#wave+3)%3 === 1)
-          EntityHandler.add(new BossSlime(GAME_WIDTH, 32));
-        else if ((this.#wave+3)%3 === 2)
-          EntityHandler.add(new BossBat);
-        else if ((this.#wave+3)%3 === 0)
-          EntityHandler.add(new BossCat);
-      }
-    }
-    // Boss fight
-    else if (this.#state === 3) {
-      if (
-        EntityHandler.enemies.length === 0 &&
-        EntityHandler.particles.length === 0
-      ) {
-        ++this.#wave;
-        this.#state = 0;
-        this.#time = 60;
-        this.#spawnDelay -= 0.1;
-
-        if (this.#spawnDelay < 0.1) this.#spawnDelay = 0.1;
-
-        this.#shopSpawned = false;
-      }
+    switch(this.#state) {
+      case 0: this.#stateEnter(dt);    break;
+      case 1: this.#stateGameplay(dt); break;
+      case 2: this.#stateCleanup();    break;
+      case 3: this.#stateBossFight();  break;
+      default: this.#state = 0;        break;
     }
 
-    EntityHandler.updatePlayers(dt);
-    EntityHandler.updateEnemies(dt);
-    EntityHandler.updateParticles(dt);
-    EntityHandler.updateBullets(dt);
-    EntityHandler.updatePickups(dt);
+    EntityHandler.updateAll(dt);
 
     Skin.update(dt);
+  }
+
+  /**
+   * @brief On wave start
+   *
+   * @param {Number} dt - Delta time
+   *
+   * @todo show wave number or player fall from sky
+   */
+  #stateEnter(dt) {
+    this.#state = 1;
+  }
+
+  /**
+   * @brief Main gameplay
+   *
+   * @param {Number} dt - Delta time
+   */
+  #stateGameplay(dt) {
+    this.#time -= dt;
+
+    if (this.#time <= 0) {
+      this.#time = 0;
+      this.#state = 2;
+    }
+
+    this.#spawnTimer += dt;
+    if (this.#spawnTimer >= this.#spawnDelay) {
+      this.#spawnTimer = 0;
+
+      // Slime
+      for (let i = 0; i < this.#wave; ++i) EntityHandler.addSlime();
+
+      // Bat
+      if (Math.random() <= 0.5) EntityHandler.addBat();
+
+      // Squid
+      if (Math.random() <= 0.2) EntityHandler.addSquid();
+
+      // Crow
+      if (Math.random() <= 0.3) EntityHandler.add(new Crow);
+
+      // Frog
+      if (Math.random() <= 0.3) EntityHandler.add(new Frog);
+    }
+
+    // Spawn shop
+    if (!this.#shopSpawned && (this.#time|0) === 30) {
+      this.#shopSpawned = true;
+      EntityHandler.add(new Shop);
+    }
+
+    Skin.setTime(this.#time);
+  }
+
+  /**
+   * @brief Clean up entities for boss fight
+   */
+  #stateCleanup() {
+    EntityHandler.removeEnemies();
+
+    if (EntityHandler.particles.length === 0) {
+      this.#state = 3;
+
+      if ((this.#wave+3)%3 === 1)
+        EntityHandler.add(new BossSlime(GAME_WIDTH, 32));
+      else if ((this.#wave+3)%3 === 2)
+        EntityHandler.add(new BossBat);
+      else if ((this.#wave+3)%3 === 0)
+        EntityHandler.add(new BossCat);
+    }
+  }
+
+  /**
+   * @brief Checks if the boss has been defeated
+   */
+  #stateBossFight() {
+    // When boss has been defeated
+    if (
+      EntityHandler.enemies.length   === 0 &&
+      EntityHandler.particles.length === 0
+    ) {
+      // Prepare next wave
+      ++this.#wave;
+      this.#state = 0;
+      this.#time = 60;
+      this.#spawnDelay -= 0.1;
+
+      if (this.#spawnDelay < 0.1) this.#spawnDelay = 0.1;
+
+      this.#shopSpawned = false;
+    }
   }
 
   render() {
     MapHandler.getMap(this.#currentMap).draw();
 
-    EntityHandler.drawParticles();
-    EntityHandler.drawPlayers();
-    EntityHandler.drawEnemies();
-    EntityHandler.drawBullets();
-    EntityHandler.drawPickups();
+    EntityHandler.drawAll();
 
     Skin.draw();
   }

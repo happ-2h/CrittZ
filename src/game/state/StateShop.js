@@ -100,6 +100,14 @@ export default class StateShop extends State {
   init() {}
 
   update(dt) {
+    this.#handleInput();
+    this.#animateIcons(dt);
+  }
+
+  /**
+   * @brief Handles input operations
+   */
+  #handleInput() {
     if (KeyHandler.isPressed("down"))
       this.#selection = this.#selection === 3 ? 0 : this.#selection + 1;
     else if (KeyHandler.isPressed("up"))
@@ -156,6 +164,15 @@ export default class StateShop extends State {
       }
     }
 
+    KeyHandler.update();
+  }
+
+  /**
+   * @brief Animates currently selected icon
+   *
+   * @param {Number} dt - Delta time
+   */
+  #animateIcons(dt) {
     this.#sinTimer += dt;
 
     if (this.#selection === 0) {
@@ -205,8 +222,6 @@ export default class StateShop extends State {
 
       this.#txt_cost.text = "";
     }
-
-    KeyHandler.update();
   }
 
   render() {

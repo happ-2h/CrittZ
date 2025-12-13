@@ -7,8 +7,8 @@ export default class Gun extends Weapon {
   #fireTimer; // Timer for firing
 
   /**
-   * @param {Number} x  - x-position
-   * @param {Number} y  - y-position
+   * @param {Number} x - x-position
+   * @param {Number} y - y-position
    */
   constructor(x=0, y=0) {
     super(x, y);

@@ -31,13 +31,13 @@ class _AssetHandler {
   poll(assetID="", filename="") {
     ++this.#toLoad;
 
-    const ext = filename.split(".").pop();
+    const ext = filename.split(".").pop().toLowerCase();
 
-    if (ext === "png")
-      this.#imgs.set(assetID, filename);
-    else if (ext === "json")
-      this.#maps.set(assetID, filename);
-    else --this.#toLoad;
+    switch(ext) {
+      case "png":  this.#imgs.set(assetID, filename); break;
+      case "json": this.#maps.set(assetID, filename); break;
+      default:     --this.#toLoad;                    break;
+    }
   }
 
   /**

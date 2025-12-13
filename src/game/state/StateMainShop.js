@@ -100,7 +100,7 @@ export default class StateMainShop extends State {
     this.#txtLuck  = new Text("0", new Vec2D(8, 24));
     this.#txtSpeed = new Text("0", new Vec2D(8, 32));
 
-    this.parsePage();
+    this.#parsePage();
   }
 
   onEnter() {}
@@ -114,11 +114,11 @@ export default class StateMainShop extends State {
   update(dt) {
     if (KeyHandler.isPressed("left")) {
       this.#page = this.#page - 1 < 0 ? this.#totalPages : this.#page - 1;
-      this.parsePage();
+      this.#parsePage();
     }
     else if (KeyHandler.isPressed("right")) {
       this.#page = this.#page + 1 > this.#totalPages ? 0 : this.#page + 1;
-      this.parsePage();
+      this.#parsePage();
     }
     else if (KeyHandler.isPressed("ActionB")) {
       StateHandler.pop();
@@ -173,7 +173,10 @@ export default class StateMainShop extends State {
     }
   }
 
-  parsePage() {
+  /**
+   * @brief Parses the current page for rendering
+   */
+  #parsePage() {
     if (this.#page >= 0 && this.#page <= 1) {
       this.#playerPreview.currentPlayer = this.#page;
 

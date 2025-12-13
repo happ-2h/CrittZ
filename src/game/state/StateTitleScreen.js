@@ -82,9 +82,38 @@ export default class StateTitleScreen extends State {
   }
 
   update(dt) {
+    this.#handleInput(dt);
+
+    EntityHandler.updateNPCs(dt);
+
+    // Logo distortion effect
     this.#freq += dt * 0.05;
 
-    // Handle input
+    for (let y = 0; y < SCREEN_HEIGHT; ++y) {
+      for (let x = 0; x < SCREEN_WIDTH; ++x) {
+        const idx = (x + y * SCREEN_WIDTH)<<2;
+
+        const dx = x + Math.cos(y * this.#freq) * this.#amp;
+        const sx = Math.max(0, Math.min(SCREEN_WIDTH - 1, Math.round(dx)));
+        const dy = y + Math.sin(x * this.#freq/4) * this.#amp * 4;
+        const sy = Math.max(0, Math.min(SCREEN_WIDTH - 1, Math.round(dy)));
+
+        const six = (sx + sy * SCREEN_WIDTH) * 4;
+
+        this.#pixels[idx]     = this.#imgData.data[six];
+        this.#pixels[idx + 1] = this.#imgData.data[six + 1];
+        this.#pixels[idx + 2] = this.#imgData.data[six + 2];
+        this.#pixels[idx + 3] = this.#imgData.data[six + 3];
+      }
+    }
+  }
+
+  /**
+   * @brief Handles input operations
+   *
+   * @param {Number} dt - Delta time
+   */
+  #handleInput(dt) {
     if (KeyHandler.isPressed("left"))
       this.#selection = this.#selection === 0 ? 2 : this.#selection - 1;
     else if (KeyHandler.isPressed("right"))
@@ -111,27 +140,6 @@ export default class StateTitleScreen extends State {
 
     this.#cursor.update(dt);
     KeyHandler.update();
-
-    EntityHandler.updateNPCs(dt);
-
-    // Logo distortion effect
-    for (let y = 0; y < SCREEN_HEIGHT; ++y) {
-      for (let x = 0; x < SCREEN_WIDTH; ++x) {
-        const idx = (x + y * SCREEN_WIDTH)<<2;
-
-        const dx = x + Math.cos(y * this.#freq) * this.#amp;
-        const sx = Math.max(0, Math.min(SCREEN_WIDTH - 1, Math.round(dx)));
-        const dy = y + Math.sin(x * this.#freq/4) * this.#amp * 4;
-        const sy = Math.max(0, Math.min(SCREEN_WIDTH - 1, Math.round(dy)));
-
-        const six = (sx + sy * SCREEN_WIDTH) * 4;
-
-        this.#pixels[idx]     = this.#imgData.data[six];
-        this.#pixels[idx + 1] = this.#imgData.data[six + 1];
-        this.#pixels[idx + 2] = this.#imgData.data[six + 2];
-        this.#pixels[idx + 3] = this.#imgData.data[six + 3];
-      }
-    }
   }
 
   render() {

@@ -33,21 +33,13 @@ export default class StateTest extends State {
       EntityHandler.add(new Crow);
     }
 
-    EntityHandler.updatePlayers(dt);
-    EntityHandler.updateEnemies(dt);
-    EntityHandler.updateParticles(dt);
-    EntityHandler.updateBullets(dt);
-    EntityHandler.updatePickups(dt);
+    EntityHandler.updateAll(dt);
   }
 
   render() {
     MapHandler.getMap("testMap").draw();
 
-    EntityHandler.drawParticles();
-    EntityHandler.drawPlayers();
-    EntityHandler.drawEnemies();
-    EntityHandler.drawBullets();
-    EntityHandler.drawPickups();
+    EntityHandler.drawAll();
 
     Skin.draw();
   }
